@@ -1,0 +1,25 @@
+name: Build and Release
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install Dependencies
+      run: npm install
+    - name: Build App
+      run: npm run build
+    - name: Archive Production Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: app-${{ matrix.os }}
+        path: dist/

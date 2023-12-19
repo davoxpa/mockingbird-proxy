@@ -1,0 +1,32 @@
+<!-- generate html for  electron -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mockingbird Proxy</title>
+  <link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+  <script  src="../assets/js/index.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="row top-bar">
+      <div class="col-6">
+        <div class="header">
+          <img src="../assets/logo/mocking-bird-proxy-logo.jpg" alt="" srcset="">
+          <h1>Mockingbird Proxy</h1>
+        </div>
+      </div>
+      <div class="col-6 controller-container d-flex justify-content-end align-items-center ">
+        <!-- <input id="path" class="path" type="text" value="/Users/davidesalvato/Downloads/mockbird"> -->
+        <p id="config"></p>
+        <span class="led"></span>
+        <input id="port" class="port" type="text" value="3000">
+        <i id="stop" class="stop bi bi-stop-fill d-none" onclick="stopServer()"></i>
+        <i id="play" class="play bi bi-play-fill" onclick="startServer()"></i>
+      </div>
+    </div>
+    <div class="row row-mock">
+    </div>
+  </div>
+  <!-- <script type="text/template" id="row-mock-element" src="../assets/template/row-mock.html"></script> -->
+</body>
+</html>

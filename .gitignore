@@ -1,0 +1,7 @@
+# Node.js
+node_modules/
+npm-debug.log
+mocks/
+dist/
+**/.DS_Store
+.DS_Store

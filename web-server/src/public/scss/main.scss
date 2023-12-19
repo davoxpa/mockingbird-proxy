@@ -1,0 +1,203 @@
+@import './bootstrap/scss/bootstrap';
+
+/* Reset di base */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    /* Grigio scuro per il testo */
+    background-color: #f4f4f4;
+    /* Grigio chiaro per lo sfondo */
+}
+
+a {
+    color: #008000;
+    /* Verde */
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* Reset di base e impostazioni globali */
+/* ... (come prima) ... */
+
+/* Classi di utilità */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Colori di sfondo */
+.bg-light {
+    background-color: #f4f4f4;
+}
+
+.bg-dark {
+    background-color: #333;
+    color: white;
+}
+
+.bg-green {
+    background-color: #008000;
+    color: white;
+}
+
+/* Colori del testo */
+.text-light {
+    color: #f4f4f4;
+}
+
+.text-dark {
+    color: #333;
+}
+
+.text-green {
+    color: #008000;
+}
+
+/* Padding e Margin */
+.p-1 {
+    padding: 0.5rem;
+}
+
+.p-2 {
+    padding: 1rem;
+}
+
+.p-3 {
+    padding: 1.5rem;
+}
+
+.m-1 {
+    margin: 0.5rem;
+}
+
+.m-2 {
+    margin: 1rem;
+}
+
+.m-3 {
+    margin: 1.5rem;
+}
+
+/* Altro */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: #008000;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken(#008000, 10%);
+    }
+}
+
+.row {
+    padding: 15px;
+    background: #373434;
+    margin: 5px;
+    border-radius: 5px;
+    color: #89d389;
+    display: grid;
+    grid-template-columns: 10fr 1fr;
+    grid-template-rows: 1fr;
+    p:nt-child(1) {
+        overflow: hidden;
+    }
+    .descriptions {
+        span.method {
+            padding: 5px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            color: #5188d6;
+            font-weight: 800;
+            font-size: 12px;
+        }
+    }
+    div.actions {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        button {
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+
+            &.status {
+                background-color: white;
+                color: green;
+                &:hover {
+                    background: #858585;
+                    color: #ffffff;
+                }
+                &.active {
+                    background-color: green;
+                    color: #fff;
+                    &:hover {
+                        background: #858585;
+                        color: #ffffff;
+                    }
+                }
+            }
+            &.delete {
+                background-color: white;
+                color: red;
+                &:hover {
+                    background: red;
+                    color: #ffffff;
+                }
+            }
+        }
+    }
+}
+
+#modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    background: white;
+    display: none;
+    .model-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: auto;
+    }
+}
+#modaljson{
+    .modal-dialog{
+        max-width: 90vw;
+        min-height: 90vh;
+        max-height: 90vh;
+    }
+}

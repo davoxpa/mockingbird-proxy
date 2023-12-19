@@ -1,0 +1,188 @@
+@import '../library/bootstrap/scss/bootstrap';
+@import '../library/bootstrap-icons/font/bootstrap-icons.min.css';
+
+$primary: #262d34;
+$secondary: #245563;
+body{
+  background-color: $primary;
+  color: white;
+}
+.top-bar{
+  .header{
+    display: flex;
+    img{
+      width: 60px;
+    }
+  }
+}
+.controller-container{
+  .play{
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .stop{
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .port {
+    cursor: text;
+    width: 60px;
+    text-align: end;
+    border: none;
+    border-bottom: 1px solid;
+    height: 20px;
+    background-color: $primary;
+    color: white;
+    &:disabled{
+      color: #6c757d;
+      border-bottom: 1px solid #6c757d;
+      cursor: not-allowed;
+    }
+  }
+  .path {
+    cursor: pointer;
+    width: 400px;
+    text-align: end;
+    border: none;
+    border-bottom: 1px solid;
+    height: 20px;
+    background-color: $primary;
+    color: white;
+    &:disabled{
+      color: #6c757d;
+      border-bottom: 1px solid #6c757d;
+      cursor: not-allowed;
+    }
+  }
+  #config{
+    margin: 0;
+    margin-right: 1rem;
+  }
+  .led{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #14681f;
+    border: 1px solid #14681f;
+    cursor: pointer;
+    margin-right: 1rem;
+    &-on{
+      background-color: #29ea42;
+      box-shadow: 0 0 12px #29ea42;
+      border: 1px solid #29ea42;
+    }
+  }
+}
+.row-mock{
+  & > div{
+    display: grid;
+    grid-template-columns: 50px 100fr auto;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
+    margin-bottom: 0.5rem;
+    border: 1px solid #3b4e62;
+    padding: 0.5rem;
+    background-color: #2b3947;
+    color: white;
+    border-radius: 10px;
+    p{
+      margin:0;
+    }
+    p.filename{
+      grid-column: 1 / 3;
+      grid-row: 2 / 3;
+    }
+    p.method {
+      border-radius: 5px;
+      background-color: #ea2929;
+      color: white;
+      padding: 2px;
+      font-size: 10px;
+      width: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .actions{
+      grid-row: 1 / 4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.container-edit{
+  .jsoneditor{
+    border: 1px solid $primary;
+    margin-bottom: 3rem;
+    .jsoneditor-navigation-bar{
+      color: white;
+      background-color: $primary;
+    }
+    .jsoneditor-menu{
+      background-color: $primary;
+      border-bottom: 1px solid $primary;
+      button{
+        opacity: 1;
+        color: white;
+      }
+      .jsoneditor-search{
+        .jsoneditor-frame{
+          background-color: $primary;
+          input{
+            background-color: $primary;
+            color: white;
+            border-bottom: 1px solid white;
+          }
+        }
+      }
+    }
+    .jsoneditor-tree-inner{
+      tbody{
+        background-color: $primary;
+      }
+    }
+    .jsoneditor-tree{
+      .jsoneditor-readonly{
+        color: #bfb9b9;
+      }
+      button{
+        &.jsoneditor-expanded{
+          filter: brightness(100);
+        }
+      }
+    }
+    div.jsoneditor-field,
+    div.jsoneditor-value,
+    div.jsoneditor td,
+    div.jsoneditor th,
+    div.jsoneditor textarea,
+    pre.jsoneditor-preview,
+    .jsoneditor-schema-error,
+    .jsoneditor-popover{
+      color: white;
+    }
+    div.jsoneditor-field[contenteditable=true]:focus,
+    div.jsoneditor-field[contenteditable=true]:hover,
+    div.jsoneditor-value[contenteditable=true]:focus,
+    div.jsoneditor-value[contenteditable=true]:hover,
+    div.jsoneditor-field.jsoneditor-highlight,
+    div.jsoneditor-value.jsoneditor-highlight {
+      background-color: $primary;
+      border: 1px solid #ffee00;
+      border-radius: 2px;
+    }
+    div.jsoneditor-tree button.jsoneditor-collapsed{
+      filter: brightness(100);
+    
+    }
+  }
+  .controller-json{
+    .bi{
+      cursor: pointer;
+      font-size: 30px;
+      margin-right: 1rem;
+    }
+  }
+}

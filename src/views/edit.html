@@ -1,0 +1,35 @@
+<!-- generate html for  electron -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Mockingbird Proxy</title>
+  
+  <script src="../assets/library/jsoneditor.js"></script>
+  <link rel="stylesheet" type="text/css" href="../assets/library/jsoneditor.css">
+  <link rel="stylesheet" type="text/css" href="../assets/styles/main.css">
+  <script src="../assets/js/edit.js"></script>
+</head>
+
+<body>
+  <div class="container container-edit">
+    <div class="row top-bar">
+      <div class="col-6">
+        <div class="header">
+          <h1>Mockingbird Proxy</h1>
+        </div>
+      </div>
+      <div class="col-6 controller-json d-flex justify-content-end align-items-center ">
+        <i class="bi bi-x-square-fill" onclick="goHome()"></i>
+        <i class="bi bi-floppy-fill" onclick="saveMock()"></i>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 controller-json">
+      </div>
+    </div>
+    <div id="jsoneditor"></div>
+  </div>
+</body>
+
+</html>
