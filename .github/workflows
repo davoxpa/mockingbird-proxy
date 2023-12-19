@@ -23,3 +23,4 @@ jobs:
       with:
         name: app-${{ matrix.os }}
         path: dist/
+        
