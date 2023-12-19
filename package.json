@@ -8,7 +8,7 @@
         "start:dev": "npm-run-all --parallel sass:electron start",
         "sass:express": "sass --watch src/public/scss:src/public/styles",
         "sass:electron": "sass --watch src/assets/scss:src/assets/styles",
-        "build": "electron-builder --all --icon 'src/assets/logo/mocking-bird-proxy-logo-1024.jpg'",
+        "build": "electron-builder --all",
         "build:macos": "electron-builder --macos --x64",
         "build:win": "electron-builder --win --x64",
         "build:linux": "electron-builder --linux --x64"

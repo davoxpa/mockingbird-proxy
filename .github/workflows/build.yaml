@@ -13,14 +13,22 @@ jobs:
     - name: Install Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '18'
+        node-version: '14'
     - name: Install Dependencies
       run: npm install
-    - name: Build App
-      run: npm run build
-    - name: Archive Production Artifacts
+    - name: Build on Ubuntu
+      if: matrix.os == 'ubuntu-latest'
+      run: npm run build-linux
+    - name: Build on Windows
+      if: matrix.os == 'windows-latest'
+      run: npm run build-windows
+    - name: Build on macOS
+      if: matrix.os == 'macos-latest'
+      run: npm run build-mac
+    - name: Archive Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: app-${{ matrix.os }}
         path: dist/
+
         
