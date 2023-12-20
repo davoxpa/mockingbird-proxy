@@ -40,6 +40,7 @@ module.exports.startServer = (port) => {
 module.exports.stopServer = () => {
     if (server) {
         server.close(() => console.log('Server fermato'));
+        server = null;
     }
 };
 module.exports.checkStatusServer = () => {

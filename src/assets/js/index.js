@@ -2,10 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const { ipcRenderer } = require('electron');
 
-window.addEventListener('load', () => {
-  ipcRenderer.send('checkServerRunning');
-});
-
 function generateMockRow(data) {
   const templatePath = path.join(__dirname, '../assets/templates/row-mock.html');
   fs.readFile(templatePath, 'utf8', (err, html) => {
@@ -24,10 +20,29 @@ function generateMockRow(data) {
   });
 }
 
+window.addEventListener('load', () => {
+    ipcRenderer.send('checkServerRunning');
+    if (localStorage.getItem('port') == 'null' || localStorage.getItem('port') == 'undefined' || localStorage.getItem('port') == '') {
+        localStorage.setItem('port', '3000');
+        document.querySelector('#port').value = localStorage.getItem('port');
+    }else if(!localStorage.getItem('port')){
+        localStorage.setItem('port', '3000');
+        document.querySelector('#port').value = localStorage.getItem('port');
+    }else{
+        document.querySelector('#port').value = localStorage.getItem('port');
+    }
+        
+    document.querySelector('#port').addEventListener('keyup', (event) => {
+        localStorage.setItem('port', event.target.value);
+    });
+});
+
+
 ipcRenderer.on('responseCheckServerRunning', (event, status) => {
-    console.log('responseCheckServerRunning');
+    console.log('responseCheckServerRunning', status);
     if (status) {
       changeUiToServerStart();
+      document.querySelector('#port').value = localStorage.getItem('port');
     }else{
       changeUiToServerStop();
     }
@@ -44,6 +59,7 @@ ipcRenderer.on('responseFilesList', (event, files) => {
 });
 
 setInterval(() => {
+  ipcRenderer.send('checkServerRunning');
   ipcRenderer.send('requestFilesList');
 }, 1000*5);
 ipcRenderer.send('requestFilesList');
@@ -96,7 +112,6 @@ function changeUiToServerStop(){
 }
 ipcRenderer.on('responseStopServer', (event) => {
   changeUiToServerStop();
-  writeLocalStorage('port', '');
   console.log('responseStopServer');
 });
 
