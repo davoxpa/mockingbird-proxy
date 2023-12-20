@@ -1,10 +1,13 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const fs = require('fs');
-// const { dialog } = require('electron').remote;
+const ffmpeg = require('fluent-ffmpeg');
+const ffmpegPath = require('ffmpeg-static-electron');
+ffmpeg.setFfmpegPath(ffmpegPath);
+
 const Store = require('electron-store');
 
 const path = require('path');
-const { getAllMock, deleteMock, getMock, saveMock } = require('../web-server/mockManager');
+const { getAllMock, deleteMock, getMock, saveMock, startMockManager } = require('../web-server/mockManager');
 // const express = require('./server'); // Importa il file server.js
 const {startServer, stopServer, checkStatusServer} = require('../web-server/server');
 
@@ -96,6 +99,7 @@ ipcMain.on('goHome', (event) => {
 });
 
 ipcMain.on('requestFilesList', (event) => {
+    startMockManager();
     event.sender.send('responseFilesList', getAllMock());
 });
 
