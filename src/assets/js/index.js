@@ -43,9 +43,9 @@ ipcRenderer.on('responseFilesList', (event, files) => {
     
 });
 
-// setInterval(() => {
-//   ipcRenderer.send('requestFilesList');
-// }, 1000*15);
+setInterval(() => {
+  ipcRenderer.send('requestFilesList');
+}, 1000*5);
 ipcRenderer.send('requestFilesList');
 
 function deleteMock(filename) {
