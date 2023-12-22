@@ -16,12 +16,6 @@ Mockingbird Proxy è un potente strumento di sviluppo che funge da intermediario
 - **Porta e Percorso**: Configura la porta e il percorso di salvataggio dei file JSON.
 - **Integrazione**: Modifica l'URL in sviluppo per utilizzare il proxy.
 
-## Uso
-# Guida all'Uso di Mockingbird-Proxy
-
-**Autore**: [Il Tuo Nome]
-**Data**: [Data]
-
 ## Introduzione
 
 Mockingbird-Proxy è uno strumento efficace per il mocking delle API durante lo sviluppo di applicazioni. Questa guida ti mostrerà come iniziare a usarlo.
