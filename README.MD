@@ -1,9 +1,10 @@
 # Mockingbird Proxy
 
+<img src="./src/assets/logo/mocking-bird-proxy-logo-1024.jpg" alt="Mockingbird Proxy Interface" width="100">
+
 ## Introduzione
 Mockingbird Proxy è un potente strumento di sviluppo che funge da intermediario tra il tuo frontend/backend e le API esterne, archiviando automaticamente tutte le chiamate API in file JSON.
 
-![Mockingbird Proxy Interface](link-dell-immagine)
 
 ## Caratteristiche
 - **Archiviazione Automatica**: Memorizza tutte le chiamate API.
@@ -24,8 +25,9 @@ Spiega come utilizzare Mockingbird Proxy nel dettaglio, inclusa la configurazion
 - **Compatibilità Estesa**: Supporta vari framework e piattaforme.
 
 ## Screenshots
-![Screenshot 1](link-dello-screenshot-1)
-![Screenshot 2](link-dello-screenshot-2)
+![Page selct working dir to save json](./screenshot/select-mock-dir.png)
+![Page List mock](./screenshot/list-mock-api.png)
+![Page edit mock](./screenshot/edit-mock-api.png)
 
 ## Contribuire
 

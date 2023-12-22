@@ -11941,26 +11941,52 @@ body {
 .row-mock > div p {
   margin: 0;
 }
-.row-mock > div p.filename {
-  grid-column: 1/3;
+.row-mock > div .filename {
+  grid-column: 2/3;
   grid-row: 2/3;
+  margin-left: 0.5rem;
 }
-.row-mock > div p.method {
+.row-mock > div .target-url {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  margin-left: 0.5rem;
+}
+.row-mock > div .actions {
+  grid-column: 3/4;
+  grid-row: 1/3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.row-mock > div .actions .form-check-input:checked {
+  background-color: #c30808;
+  border-color: #d43f3f;
+}
+.row-mock > div .method {
+  grid-column: 1/2;
+  grid-row: 1/3;
   border-radius: 5px;
   background-color: #ea2929;
   color: white;
   padding: 2px;
   font-size: 10px;
-  width: fit-content;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: 700;
 }
-.row-mock > div .actions {
-  grid-row: 1/4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.row-mock > div .method-get {
+  background-color: #0baa20;
+}
+.row-mock > div .method-post {
+  background-color: #df9401;
+}
+.row-mock > div .method-put {
+  background-color: #ea5b29;
+}
+.row-mock > div .method-patch {
+  background-color: #89460c;
 }
 
 .container-edit .jsoneditor {

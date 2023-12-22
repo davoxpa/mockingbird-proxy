@@ -119,6 +119,7 @@ function createMockElement({method, targetUrl, uuid, bypassCache}) {
     // Crea e aggiungi il paragrafo per il metodo
     const methodP = document.createElement('p');
     methodP.className = 'method';
+    methodP.classList.add(`method-${method.toLowerCase()}`);
     methodP.textContent = method;
     container.appendChild(methodP);
 
@@ -131,7 +132,7 @@ function createMockElement({method, targetUrl, uuid, bypassCache}) {
     // Crea e aggiungi il paragrafo per l'UUID
     const uuidP = document.createElement('p');
     uuidP.className = 'filename';
-    uuidP.textContent = uuid;
+    uuidP.textContent = 'filename: ' + uuid;
     container.appendChild(uuidP);
 
     // Crea il contenitore per le azioni
