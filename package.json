@@ -1,6 +1,6 @@
 {
     "name": "mockingbird-proxy",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "mockingbird-proxy is a simple proxy server that allows you to mock API responses.",
     "main": "./src/main.js",
     "scripts": {
@@ -12,8 +12,18 @@
         "build:win": "electron-builder --win --x64",
         "build:linux": "electron-builder --linux --x64"
     },
-    "author": "",
+    "author": "Davide Salvato",
     "license": "ISC",
+    "keywords": [
+        "mockingbird",
+        "mockingbird-proxy",
+        "proxy",
+        "mock",
+        "mock api",
+        "sniffer api",
+        "api",
+        "mocki"
+    ],
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "bootstrap": "^5.3.2",
