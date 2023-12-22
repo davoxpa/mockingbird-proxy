@@ -17,7 +17,36 @@ Mockingbird Proxy è un potente strumento di sviluppo che funge da intermediario
 - **Integrazione**: Modifica l'URL in sviluppo per utilizzare il proxy.
 
 ## Uso
-Spiega come utilizzare Mockingbird Proxy nel dettaglio, inclusa la configurazione dell'ambiente di sviluppo e la modifica degli endpoint delle API.
+# Guida all'Uso di Mockingbird-Proxy
+
+**Autore**: [Il Tuo Nome]
+**Data**: [Data]
+
+## Introduzione
+
+Mockingbird-Proxy è uno strumento efficace per il mocking delle API durante lo sviluppo di applicazioni. Questa guida ti mostrerà come iniziare a usarlo.
+
+## Avvio dell'Applicazione Mockingbird-Proxy
+
+### Passo 1: Avvio dell'Applicazione
+
+1. Avvia l'applicazione Mockingbird-Proxy.
+2. Nel pannello in alto a destra, trova l'opzione per cambiare la porta.
+3. Scegli la porta desiderata e avvia il server.
+
+### Passo 2: Configurazione nel Tuo Progetto
+
+Dopo aver avviato il server Mockingbird-Proxy, reindirizza le tue chiamate API attraverso il proxy. 
+
+Ad esempio, cambia:<br />
+`https://il-mio-backend.com/api/v1/blog/posts`<br />
+in:<br />
+`http://localhost:3000/https://il-mio-backend.com/api/v1/blog/posts`<br />
+
+
+Aggiungi `http://localhost:3000/` come prefisso all'URL del tuo backend per utilizzare il server di mocking.
+
+---
 
 ## Vantaggi
 - **Documentazione del Modello Dati**: Utile per archiviare il modello dati delle chiamate API.
