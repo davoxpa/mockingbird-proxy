@@ -71,7 +71,7 @@ async function proxySniffer(req, res, next) {
         const mockArchive = getMock(sha256);
         if (mockArchive && !mockArchive.bypassCache) {
             // Restituisci la risposta dall'archivio
-            res.json(mockArchive);
+            res.status(mockArchive.statusCode).json(mockArchive.response);
         } else {
             // Inoltra la richiesta al server esterno
 

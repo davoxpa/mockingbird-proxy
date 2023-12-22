@@ -2,28 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const { ipcRenderer } = require('electron');
 
-function generateMockRow(data) {
-  const templatePath = path.join(__dirname, '../assets/templates/row-mock.html');
-  fs.readFile(templatePath, 'utf8', (err, html) => {
-      if (err) {
-          console.error('Errore nella lettura del file:', err);
-          return;
-      }
-      let template = html
-          .replace('{{method}}', data.method)
-          .replace('{{targetUrl}}', data.targetUrl)
-          .replace(/{{uuid}}/g, data.uuid);
-          
-      data.bypassCache
-          ? (template = template.replace('{{bypass}}', 'checked'))
-          : (template = template.replace('{{bypass}}', ''));
-
-      let templateHtml = document.querySelector('.row-mock').innerHTML;
-      templateHtml += template;
-      document.querySelector('.row-mock').innerHTML = templateHtml;
-  });
-}
-
 window.addEventListener('load', () => {
     ipcRenderer.send('checkServerRunning');
     if (localStorage.getItem('port') == 'null' || localStorage.getItem('port') == 'undefined' || localStorage.getItem('port') == '') {
@@ -59,7 +37,9 @@ ipcRenderer.on('responseFilesList', (event, files) => {
     // Qui puoi manipolare il DOM per mostrare i file...
     document.querySelector('.row-mock').innerHTML = '';
     files.forEach((file) => {
-        generateMockRow(file);
+        // generateMockRow(file);
+        const mockElement = createMockElement(file);
+        document.querySelector('.row-mock').appendChild(mockElement);
     });
     
 });
@@ -129,4 +109,75 @@ function bypassChange(el) {
   console.log('bypassChange', el);
   const status = el.checked ? true : false;
   ipcRenderer.send('changeValueMock', el.dataset.uuid, 'bypassCache', status);
+}
+
+function createMockElement({method, targetUrl, uuid, bypassCache}) {
+    // Crea il contenitore principale
+    const container = document.createElement('div');
+    container.className = 'col-12';
+
+    // Crea e aggiungi il paragrafo per il metodo
+    const methodP = document.createElement('p');
+    methodP.className = 'method';
+    methodP.textContent = method;
+    container.appendChild(methodP);
+
+    // Crea e aggiungi il paragrafo per l'URL target
+    const targetUrlP = document.createElement('p');
+    targetUrlP.className = 'target-url';
+    targetUrlP.textContent = targetUrl;
+    container.appendChild(targetUrlP);
+
+    // Crea e aggiungi il paragrafo per l'UUID
+    const uuidP = document.createElement('p');
+    uuidP.className = 'filename';
+    uuidP.textContent = uuid;
+    container.appendChild(uuidP);
+
+    // Crea il contenitore per le azioni
+    const actionsDiv = document.createElement('div');
+    actionsDiv.className = 'actions';
+
+    // Crea il div per il form check
+    const formCheckDiv = document.createElement('div');
+    formCheckDiv.className = 'form-check form-switch m-1';
+
+    // Crea e aggiungi la label
+    const label = document.createElement('label');
+    label.className = 'form-check-label';
+    label.setAttribute('for', 'flexSwitchCheckChecked');
+    label.textContent = 'Bypass';
+    formCheckDiv.appendChild(label);
+
+    // Crea e aggiungi il checkbox
+    const input = document.createElement('input');
+    input.className = 'form-check-input';
+    input.setAttribute('data-uuid', uuid);
+    input.type = 'checkbox';
+    input.role = 'switch';
+    input.id = 'flexSwitchCheckChecked';
+    input.checked = bypassCache;
+    input.onchange = function () {
+        bypassChange(this);
+    }; // Assicurati che la funzione bypassChange sia definita
+    formCheckDiv.appendChild(input);
+
+    actionsDiv.appendChild(formCheckDiv);
+
+    // Crea e aggiungi l'icona di modifica
+    const editIcon = document.createElement('i');
+    editIcon.className = 'bi bi-pencil-fill px-1';
+    editIcon.onclick = () => editMock(uuid); // Assicurati che la funzione editMock sia definita
+    actionsDiv.appendChild(editIcon);
+
+    // Crea e aggiungi l'icona di cancellazione
+    const deleteIcon = document.createElement('i');
+    deleteIcon.className = 'bi bi-trash-fill px-1';
+    deleteIcon.onclick = () => deleteMock(uuid); // Assicurati che la funzione deleteMock sia definita
+    actionsDiv.appendChild(deleteIcon);
+
+    // Aggiungi il contenitore delle azioni al contenitore principale
+    container.appendChild(actionsDiv);
+
+    return container;
 }

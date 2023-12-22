@@ -11866,6 +11866,7 @@ body {
 }
 .top-bar .header img {
   width: 60px;
+  height: 60px;
 }
 
 .controller-container .play {
@@ -12032,6 +12033,27 @@ body {
   display: flex;
   justify-content: start;
   align-items: center;
+}
+
+.path-history {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.path-history .path {
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  margin: 0.2rem 1rem;
+  border-radius: 5px;
+}
+.path-history .path:hover {
+  background-color: #3b4e62;
+}
+.path-history .path p {
+  padding: 0.5rem;
+  margin: 0;
 }
 
 /*# sourceMappingURL=main.css.map */

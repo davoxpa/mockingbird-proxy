@@ -8,7 +8,16 @@ const ffmpeg = require('fluent-ffmpeg');
 const ffmpegPath = require('ffmpeg-static-electron');
 ffmpeg.setFfmpegPath(ffmpegPath);
 
+const isDev =
+    process.defaultApp ||
+    /[\\/]electron-prebuilt[\\/]/.test(process.execPath) ||
+    /[\\/]electron[\\/]/.test(process.execPath);
 
+if (isDev) {
+    console.log('In modalità Sviluppo');
+} else {
+    console.log('In modalità Produzione');
+}
 
 // menu app 
 require('./menu');
@@ -49,7 +58,9 @@ function createWindow() {
     // mainWindow.loadFile(path.join(__dirname, './views/index.html'));
 
     // Aprire gli strumenti di sviluppo automaticamente
-    mainWindow.webContents.openDevTools();
+    if (isDev){
+        mainWindow.webContents.openDevTools();
+    }
     
     mainWindow.on('closed', function () {
         mainWindow = null;

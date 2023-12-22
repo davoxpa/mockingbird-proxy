@@ -5,10 +5,9 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 ipcRenderer.on('responseGetWorkingDirPath', (event, data) => {
-    debugger;
     data.forEach(element => {
         const p = document.createElement('p');
-        p.classList.add('path');
+        p.classList.add('text-center');
         p.innerHTML = element;
         p.addEventListener('click', (e) => {
             console.log('click', e.target.innerHTML);
@@ -26,6 +25,7 @@ ipcRenderer.on('responseGetWorkingDirPath', (event, data) => {
 
         const div = document.createElement('div');
         div.classList.add('col-12');
+        div.classList.add('path');
         div.appendChild(p);
         div.appendChild(deleteIcon);
 
