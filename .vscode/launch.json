@@ -12,6 +12,24 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/web-server/debuggerServer.js"
+        },
+        {
+            "name": "Debug Electron Main Process",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/src/main.js",
+            "stopOnEntry": false,
+            "args": [],
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
+            "runtimeArgs": [
+                "--remote-debugging-port=9223"
+            ],
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "console": "integratedTerminal",
+            "protocol": "inspector"
         }
     ]
 }

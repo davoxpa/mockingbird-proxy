@@ -3,6 +3,10 @@
     <p class="target-url">{{targetUrl}}</p>
     <p class="filename">{{uuid}}</p>
     <div class="actions">
+      <div class="form-check form-switch m-1 ">
+        <label class="form-check-label" for="flexSwitchCheckChecked">Bypass</label>
+        <input class="form-check-input" data-uuid="{{uuid}}" type="checkbox" role="switch" id="flexSwitchCheckChecked" {{bypass}} onchange="bypassChange(this)">
+      </div>
       <i class="bi bi-pencil-fill px-1" onclick="editMock('{{uuid}}')"></i>
       <i class="bi bi-trash-fill px-1" onclick="deleteMock('{{uuid}}')"></i>
     </div>

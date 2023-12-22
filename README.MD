@@ -1,11 +1,43 @@
-# Mockingbird Proxy: Il Tuo Assistente per il Debugging di API
+# Mockingbird Proxy
 
-Mockingbird Proxy è un'applicazione versatile che agisce come intermediario tra il tuo frontend (o backend) e le API esterne. Funziona archiviando tutte le chiamate API come file JSON, consentendoti di modificarle e personalizzarle facilmente.
+## Introduzione
+Mockingbird Proxy è un potente strumento di sviluppo che funge da intermediario tra il tuo frontend/backend e le API esterne, archiviando automaticamente tutte le chiamate API in file JSON.
+
+![Mockingbird Proxy Interface](link-dell-immagine)
 
 ## Caratteristiche
+- **Archiviazione Automatica**: Memorizza tutte le chiamate API.
+- **Modifica Risposte**: Personalizza risposte API e status code.
+- **Caching**: Accelera il caricamento durante lo sviluppo.
+- **Flessibilità**: Passa facilmente dalla cache alle risposte reali.
 
-- **Archiviazione e Modifica delle Chiamate API**: Salva ogni chiamata API come file JSON, consentendo una facile modifica e personalizzazione.
-- **Risposte API Personalizzate**: Utilizza risposte JSON memorizzate per testare diverse risposte, inclusa la modifica dello status code.
-- **Funzionalità di Proxy Disattivabile**: Permette di disattivare il proxy, indirizzando le chiamate direttamente al backend e riattivarlo a piacimento.
+## Configurazione
+- **Porta e Percorso**: Configura la porta e il percorso di salvataggio dei file JSON.
+- **Integrazione**: Modifica l'URL in sviluppo per utilizzare il proxy.
 
-Mockingbird Proxy è lo strumento ideale per sviluppatori che desiderano testare e debuggare le interazioni API senza dipendere continuamente dal server remoto.
+## Uso
+Spiega come utilizzare Mockingbird Proxy nel dettaglio, inclusa la configurazione dell'ambiente di sviluppo e la modifica degli endpoint delle API.
+
+## Vantaggi
+- **Documentazione del Modello Dati**: Utile per archiviare il modello dati delle chiamate API.
+- **Eliminazione dei Problemi CORS**: Facilita lo sviluppo evitando problemi di CORS.
+- **Compatibilità Estesa**: Supporta vari framework e piattaforme.
+
+## Screenshots
+![Screenshot 1](link-dello-screenshot-1)
+![Screenshot 2](link-dello-screenshot-2)
+
+## Contribuire
+
+Apprezziamo ogni contributo a Mockingbird Proxy! Ecco come puoi partecipare:
+
+1. **Fork del Repository**: Visita il [repository GitHub](https://github.com/davoxpa/mockingbird-proxy/) e crea un fork.
+2. **Crea una Branch**: Dalla tua fork, crea una nuova branch per le tue modifiche.
+3. **Apporta Modifiche**: Implementa le tue idee e correzioni.
+4. **Invia una Pull Request**: Una volta testate le modifiche, invia una pull request alla branch principale.
+5. **Revisione**: Esamineremo la tua pull request e ti forniremo un feedback.
+
+Ogni contributo, grande o piccolo, è molto apprezzato. Grazie per il tuo supporto!
+
+## Licenza
+Apache License 2.0

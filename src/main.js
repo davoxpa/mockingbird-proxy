@@ -1,21 +1,30 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 const fs = require('fs');
+const path = require('path');
+const Store = require('electron-store');
+
+// dipendenza per ffmpeg che serve anche se si vuole fare un app portable
 const ffmpeg = require('fluent-ffmpeg');
 const ffmpegPath = require('ffmpeg-static-electron');
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-const Store = require('electron-store');
 
-const path = require('path');
-const { getAllMock, deleteMock, getMock, saveMock, startMockManager } = require('../web-server/mockManager');
-// const express = require('./server'); // Importa il file server.js
-const {startServer, stopServer, checkStatusServer} = require('../web-server/server');
+
+// menu app 
+require('./menu');
+
+// gestione mock
+const { getAllMock, deleteMock, getMock, saveMock, startMockManager, changeValueOnMock } = require('./app-proxy-server/mockManager');
+
+// gestione server 
+const {startServer, stopServer, checkStatusServer} = require('./app-proxy-server/server');
 
 let mainWindow;
 let dirPath;
 
+// init store per l'archiviazione dei dati
 let store = new Store();
-store.clear();
+
 function createWindow() {
     mainWindow = new BrowserWindow({
         icon: path.join(__dirname, './assets/logo/mocking-bird-proxy-logo-1024.icns'),
@@ -26,23 +35,22 @@ function createWindow() {
     });
     mainWindow.maximize();
 
-    if (store.get('dirPath')) {
-        dirPath = store.get('dirPath');
-    }
-    console.log('dirPath', dirPath)
-    if (dirPath && dirPath.length > 0) {
-        mainWindow.loadFile(path.join(__dirname, './views/index.html'));
-    } else {
-        mainWindow.loadFile(path.join(__dirname, './views/config.html'));
-        // dirPath = dialog.showOpenDialog({ properties: ['openDirectory'] });
-        // store.set('dirPath', dirPath);
-    }
+    // if (store.get('dirPath')) {
+    //     dirPath = store.get('dirPath');
+    // }
+    // console.log('dirPath', dirPath)
+    // if (dirPath && dirPath.length > 0) {
+    //     mainWindow.loadFile(path.join(__dirname, './views/index.html'));
+    // } else {
+    //     // dirPath = dialog.showOpenDialog({ properties: ['openDirectory'] });
+    //     // store.set('dirPath', dirPath);
+    // }
+    mainWindow.loadFile(path.join(__dirname, './views/config.html'));
     // mainWindow.loadFile(path.join(__dirname, './views/index.html'));
 
     // Aprire gli strumenti di sviluppo automaticamente
-    // mainWindow.webContents.openDevTools();
-
-    // mainWindow.loadURL('http://localhost:3000/manager'); // Carica il server Express
+    mainWindow.webContents.openDevTools();
+    
     mainWindow.on('closed', function () {
         mainWindow = null;
     });
@@ -65,8 +73,12 @@ app.on('activate', function () {
 //     dirPath = dialog.showOpenDialog({ properties: ['openDirectory'] });
 //     store.set('dirPath', dirPath);
 // });
+ipcMain.on('getWorkingDirPath', (event) => {
+    const historyStoreDirPath = store.get('historyStoreDirPath');
+    event.sender.send('responseGetWorkingDirPath', historyStoreDirPath);
+});
 
-ipcMain.on('firstSetWorkingDirPath', async (event) => {
+ipcMain.on('selectDir', async (event) => {
     try {
         const dirSelected = await dialog.showOpenDialog({ properties: ['openDirectory'] });
         dirPath = dirSelected.filePaths[0];
@@ -74,32 +86,42 @@ ipcMain.on('firstSetWorkingDirPath', async (event) => {
         fs.access(dirPath, fs.constants.W_OK, (err) => {
             if (err) {
                 console.error('Errore nella scrittura della cartella:', err);
-                event.sender.send('errorFirstSetWorkingDirPath', err);
+                event.sender.send('errorSelectDir', err);
                 return;
             }
             store.set('dirPath', dirPath);
             console.log('requestDirPath', dirPath)
-            event.sender.send('responseFirstSetWorkingDirPath', dirPath);
+            const historyStoreDirPath = store.get('historyStoreDirPath') || [];
+            const uniqueStoreDirPath = [...new Set([...historyStoreDirPath, dirPath])];
+            store.set('historyStoreDirPath', uniqueStoreDirPath);
+            event.sender.send('responseSelectDir', dirPath);
             setTimeout(() => {
                 console.log('setTimeout')
                 mainWindow.loadFile(path.join(__dirname, './views/index.html'));
-            }, 2000);
+            }, 1000);
         });
     } catch (error) {
         console.error('Errore:', error);
     }
 });
 
+ipcMain.on('openHistoryDir', (event, dirPath) => {
+    startMockManager();
+    console.log('openHistoryDir', dirPath)
+    store.set('dirPath', dirPath);
+    mainWindow.loadFile(path.join(__dirname, './views/index.html'));
+});
+
 
 // ipc section
 ipcMain.on('goHome', (event) => {
+    startMockManager();
     console.log('goHome')
     mainWindow.loadFile(path.join(__dirname, './views/index.html'));
     event.sender.send('responseGoHome');
 });
 
 ipcMain.on('requestFilesList', (event) => {
-    startMockManager();
     event.sender.send('responseFilesList', getAllMock());
 });
 
@@ -137,6 +159,22 @@ ipcMain.on('saveMock', (event, mock) => {
 });
 
 ipcMain.on('checkServerRunning', (event)=>{
-    console.log('checkServerRunning', checkStatusServer())
     event.sender.send('responseCheckServerRunning', checkStatusServer());
+})
+
+ipcMain.on('goToConfig', (event)=>{
+    stopServer();
+    console.log('goToConfig')
+    mainWindow.loadFile(path.join(__dirname, './views/config.html'));
+    // event.sender.send('responseGoToConfig');
+})
+
+ipcMain.on('changeValueMock', (event, filename, key, value)=>{
+    console.log('changeValueMock', filename, key, value)
+    const result = changeValueOnMock(filename, key, value);
+    if(result){
+        event.sender.send('responseChangeValueMockSuccess');
+    }else{
+        event.sender.send('responseChangeValueMockFail');
+    }
 })

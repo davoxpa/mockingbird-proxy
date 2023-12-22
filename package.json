@@ -4,9 +4,8 @@
     "description": "mockingbird-proxy is a simple proxy server that allows you to mock API responses.",
     "main": "./src/main.js",
     "scripts": {
-        "start": "electron .",
-        "start:dev": "npm-run-all --parallel sass:electron start",
-        "sass:express": "sass --watch src/public/scss:src/public/styles",
+        "start": "electron src/main.js",
+        "start:dev": "npm-run-all --parallel start sass:electron",
         "sass:electron": "sass --watch src/assets/scss:src/assets/styles",
         "build": "electron-builder --all",
         "build:macos": "electron-builder --macos --x64",
