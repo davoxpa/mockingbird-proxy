@@ -111,6 +111,8 @@ function bypassChange(el) {
   ipcRenderer.send('changeValueMock', el.dataset.uuid, 'bypassCache', status);
 }
 
+// Dom manipulation
+
 function createMockElement({method, targetUrl, uuid, bypassCache}) {
     // Crea il contenitore principale
     const container = document.createElement('div');

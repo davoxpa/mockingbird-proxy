@@ -1,7 +1,7 @@
 const fs = require("fs");
 const Store = require('electron-store');
 const path = require("path");
-const { ipcMain } = require("electron");
+const { BrowserWindow, ipcMain } = require("electron");
 
 // Definisci il percorso della cartella che desideri controllare/creare
 const store = new Store();
@@ -10,14 +10,6 @@ let folderPath;
 const startMockManager = () => {
   console.log('startMockManager', store.get('dirPath'));
   folderPath = store.get('dirPath');
-  // Verifica se la cartella esiste
-  // if (!fs.existsSync(folderPath)) {
-  //   // Se la cartella non esiste, creala
-  //   fs.mkdirSync(folderPath);
-  //   console.log(`Cartella '${folderPath}' creata con successo.`);
-  // } else {
-  //   console.log(`La cartella '${folderPath}' esiste già.`);
-  // }
 }
 
 const saveMock = (filename, mock) => {
@@ -26,8 +18,7 @@ const saveMock = (filename, mock) => {
     filePath,
     JSON.stringify(mock, null, 2)
   );
-  ipcMain.emit('saveNewMock', mock);
-  console.log(`File '${filename}' salvato con successo.`);
+  ipcMain.emit('requestFilesList');
 }
 
 const getMock = (filename) => {

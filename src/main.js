@@ -86,7 +86,7 @@ app.on('activate', function () {
 // });
 ipcMain.on('getWorkingDirPath', (event) => {
     const historyStoreDirPath = store.get('historyStoreDirPath');
-    event.sender.send('responseGetWorkingDirPath', historyStoreDirPath);
+    mainWindow.webContents.send('responseGetWorkingDirPath', historyStoreDirPath);
 });
 
 ipcMain.on('selectDir', async (event) => {
@@ -97,7 +97,7 @@ ipcMain.on('selectDir', async (event) => {
         fs.access(dirPath, fs.constants.W_OK, (err) => {
             if (err) {
                 console.error('Errore nella scrittura della cartella:', err);
-                event.sender.send('errorSelectDir', err);
+                mainWindow.webContents.send('errorSelectDir', err);
                 return;
             }
             store.set('dirPath', dirPath);
@@ -105,7 +105,7 @@ ipcMain.on('selectDir', async (event) => {
             const historyStoreDirPath = store.get('historyStoreDirPath') || [];
             const uniqueStoreDirPath = [...new Set([...historyStoreDirPath, dirPath])];
             store.set('historyStoreDirPath', uniqueStoreDirPath);
-            event.sender.send('responseSelectDir', dirPath);
+            mainWindow.webContents.send('responseSelectDir', dirPath);
             setTimeout(() => {
                 console.log('setTimeout')
                 mainWindow.loadFile(path.join(__dirname, './views/index.html'));
@@ -129,29 +129,29 @@ ipcMain.on('goHome', (event) => {
     startMockManager();
     console.log('goHome')
     mainWindow.loadFile(path.join(__dirname, './views/index.html'));
-    event.sender.send('responseGoHome');
+    mainWindow.webContents.send('responseGoHome');
 });
 
 ipcMain.on('requestFilesList', (event) => {
-    event.sender.send('responseFilesList', getAllMock());
+    mainWindow.webContents.send('responseFilesList', getAllMock());
 });
 
 ipcMain.on('deleteMock', (event, filename) => {
     console.log('delete', filename)
     deleteMock(filename);
-    event.sender.send('responseDeleteMock', filename);
+    mainWindow.webContents.send('responseDeleteMock', filename);
 });
 
 ipcMain.on('startServer', (event, port) => {
     console.log('electron startServer', port)
     startServer(port);
-    event.sender.send('responseStartServer', port);
+    mainWindow.webContents.send('responseStartServer', port);
 });
 
 ipcMain.on('stopServer', (event) => {
     console.log('electron stopServer')
     stopServer();
-    event.sender.send('responseStopServer');
+    mainWindow.webContents.send('responseStopServer');
 });
 
 ipcMain.on('editMock', (event, filename) => {
@@ -166,11 +166,11 @@ ipcMain.on('editMock', (event, filename) => {
 ipcMain.on('saveMock', (event, mock) => {
     console.log('saveMock', mock)
     saveMock(mock.uuid, mock);
-    event.sender.send('responseSaveMock', mock);
+    mainWindow.webContents.send('responseSaveMock', mock);
 });
 
 ipcMain.on('checkServerRunning', (event)=>{
-    event.sender.send('responseCheckServerRunning', checkStatusServer());
+    mainWindow.webContents.send('responseCheckServerRunning', checkStatusServer());
 })
 
 ipcMain.on('goToConfig', (event)=>{
@@ -184,8 +184,8 @@ ipcMain.on('changeValueMock', (event, filename, key, value)=>{
     console.log('changeValueMock', filename, key, value)
     const result = changeValueOnMock(filename, key, value);
     if(result){
-        event.sender.send('responseChangeValueMockSuccess');
+        mainWindow.webContents.send('responseChangeValueMockSuccess');
     }else{
-        event.sender.send('responseChangeValueMockFail');
+        mainWindow.webContents.send('responseChangeValueMockFail');
     }
 })
