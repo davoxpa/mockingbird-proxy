@@ -15,13 +15,34 @@
           <h1>Mockingbird Proxy</h1>
         </div>
       </div>
-      <div class="col-6 controller-container d-flex justify-content-end align-items-center ">
+      <div class="col-6 text-end">
+        <p>Save dir: <span id="path"></span></p>
+      </div>
+    </div>
+    <div class="row top-action-all">
+      <div class="col-8 controller-container d-flex justify-content-start align-items-center ">
         <!-- <input id="path" class="path" type="text" value="/Users/davidesalvato/Downloads/mockbird"> -->
-        <p id="config"></p>
         <span class="led"></span>
         <input id="port" class="port" type="text" value="">
         <i id="stop" class="stop bi bi-stop-fill d-none" onclick="stopServer()"></i>
         <i id="play" class="play bi bi-play-fill" onclick="startServer()"></i>
+        <p id="config"></p>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        <div>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="bypassGlobal" onchange="bypassAllChange(this)">
+            <label class="form-check-label" for="bypassGlobal">Bypass All</label>
+          </div>
+        </div>
+        <div class="delete-section">
+          <button type="button" class="btn btn-danger delete-all" onclick="showConfirmDelete()"><i class="bi bi-trash-fill"></i> Delete all mock</button>
+          <button type="button" class="btn btn-danger confirm-delete-all d-none" onclick="deleteAllMock()">
+            <i class="bi bi-trash-fill"></i>
+            Confirm Delete
+            <div class="time-delete"></div>
+          </button>
+        </div>
       </div>
     </div>
     <div class="row row-mock">

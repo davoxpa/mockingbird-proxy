@@ -4,6 +4,15 @@
 $primary: #262d34;
 $secondary: #245563;
 
+@keyframes timer-delete {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
+
 body {
   background-color: $primary;
   color: white;
@@ -16,6 +25,26 @@ body {
     img {
       width: 60px;
       height: 60px;
+    }
+  }
+}
+
+.top-action-all{
+  margin-bottom: .3rem;
+  .delete-section{
+    margin-left: 1rem;
+  }
+  .confirm-delete-all{
+    position: relative;
+    .time-delete{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      // width: 100%;
+      height: 4px;
+      background-color: #ffe700;
+      animation-name: timer-delete;
+      animation-duration: 5s;
     }
   }
 }

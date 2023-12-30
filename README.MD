@@ -52,6 +52,16 @@ Aggiungi `http://localhost:3000/` come prefisso all'URL del tuo backend per util
 ![Page List mock](./screenshot/list-mock-api.png)
 ![Page edit mock](./screenshot/edit-mock-api.png)
 
+## Roadmap
+- [x] Aggiungi funzionalità di modifica delle risposte.
+- [x] Aggiungi funzionalità di modifica dello status code.
+- [x] Aggiungi funzionalità di caching.
+- [x] Aggiungi funzionalità di bypass singola url.
+- [x] Aggiungi funzionalità di bypass massivo.
+- [x] Aggiungere funzionalità di cancellazione di tutti i file.
+- [] Aggiungere funzionalità di ricerca tra i mock.
+- [] Aggiungere un monitor per i log delle chiamate API.
+
 ## Contribuire
 
 Apprezziamo ogni contributo a Mockingbird Proxy! Ecco come puoi partecipare:

@@ -4,6 +4,7 @@ const { ipcRenderer } = require('electron');
 
 window.addEventListener('load', () => {
     ipcRenderer.send('checkServerRunning');
+    ipcRenderer.send('getConfig');
     if (localStorage.getItem('port') == 'null' || localStorage.getItem('port') == 'undefined' || localStorage.getItem('port') == '') {
         localStorage.setItem('port', '3000');
         document.querySelector('#port').value = localStorage.getItem('port');
@@ -28,6 +29,12 @@ ipcRenderer.on('responseCheckServerRunning', (event, status) => {
     }else{
       changeUiToServerStop();
     }
+});
+
+ipcRenderer.on('responseGetConfig', (event, config) => {
+    console.log('responseGetConfig', config);
+    document.querySelector('#path').innerHTML = config.dirPath;
+    document.querySelector('#bypassGlobal').checked = config.bypassGlobal;
 });
 
 ipcRenderer.on('responseFilesList', (event, files) => {
@@ -72,7 +79,7 @@ function startServer() {
   ipcRenderer.send('startServer', port);
 }
 function changeUiToServerStart(){
-  document.querySelector('#config').innerHTML = 'http://localhost:' + document.querySelector('#port').value + '/your-real-api-url.com/api/v1/...';
+  document.querySelector('#config').innerHTML = 'http://localhost:' + document.querySelector('#port').value + '/https://your-real-api-url.com/api/v1/...';
   document.querySelector('#port').disabled = true;
   // document.querySelector('#path').disabled = true;
   document.querySelector('#stop').classList.remove('d-none');
@@ -105,13 +112,40 @@ function writeLocalStorage(name, value) {
     localStorage.setItem(name, value);
 }
 
-function bypassChange(el) {
-  console.log('bypassChange', el);
-  const status = el.checked ? true : false;
-  ipcRenderer.send('changeValueMock', el.dataset.uuid, 'bypassCache', status);
+function showConfirmDelete() {
+  document.querySelector('.delete-all').classList.add('d-none');
+  document.querySelector('.confirm-delete-all').classList.remove('d-none');
+  document.querySelector('.confirm-delete-all').classList.add('timer');
+  setTimeout(() => {
+    hideConfirmDelete();
+  }, 5000);
 }
 
-// Dom manipulation
+function hideConfirmDelete() {
+  document.querySelector('.confirm-delete-all').classList.add('d-none');
+  document.querySelector('.delete-all').classList.remove('d-none');
+}
+
+function deleteAllMock() {
+  ipcRenderer.send('deleteAllMock');
+  hideConfirmDelete();
+}
+ipcRenderer.on('responseDeleteAllMock', (event) => {
+  ipcRenderer.send('requestFilesList');
+});
+
+function bypassChange(el) {
+    console.log('bypassChange', el);
+    const status = el.checked ? true : false;
+    ipcRenderer.send('changeValueMock', el.dataset.uuid, 'bypassCache', status);
+}
+
+function bypassAllChange(el) {
+    console.log('bypassAllChange', el);
+    ipcRenderer.send('byPassGlobalChange', el.checked);
+}
+
+// Generate dom element for mock
 
 function createMockElement({method, targetUrl, uuid, bypassCache}) {
     // Crea il contenitore principale

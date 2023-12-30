@@ -2,6 +2,8 @@ const { app, BrowserWindow, ipcMain, dialog, Menu } = require('electron');
 const fs = require('fs');
 const path = require('path');
 const Store = require('electron-store');
+const StoreManager = require('./storeManager');
+const storeManager = StoreManager.getInstance();
 
 // dipendenza per ffmpeg che serve anche se si vuole fare un app portable
 const ffmpeg = require('fluent-ffmpeg');
@@ -23,7 +25,7 @@ if (isDev) {
 require('./menu');
 
 // gestione mock
-const { getAllMock, deleteMock, getMock, saveMock, startMockManager, changeValueOnMock } = require('./app-proxy-server/mockManager');
+const { getAllMock, deleteMock, deleteAllMock, getMock, saveMock, startMockManager, changeValueOnMock } = require('./app-proxy-server/mockManager');
 
 // gestione server 
 const {startServer, stopServer, checkStatusServer} = require('./app-proxy-server/server');
@@ -42,20 +44,8 @@ function createWindow() {
             contextIsolation: false,
         },
     });
-    mainWindow.maximize();
-
-    // if (store.get('dirPath')) {
-    //     dirPath = store.get('dirPath');
-    // }
-    // console.log('dirPath', dirPath)
-    // if (dirPath && dirPath.length > 0) {
-    //     mainWindow.loadFile(path.join(__dirname, './views/index.html'));
-    // } else {
-    //     // dirPath = dialog.showOpenDialog({ properties: ['openDirectory'] });
-    //     // store.set('dirPath', dirPath);
-    // }
     mainWindow.loadFile(path.join(__dirname, './views/config.html'));
-    // mainWindow.loadFile(path.join(__dirname, './views/index.html'));
+    mainWindow.maximize();
 
     // Aprire gli strumenti di sviluppo automaticamente
     if (isDev){
@@ -77,15 +67,8 @@ app.on('activate', function () {
     if (mainWindow === null) createWindow()
 });
 
-// app.on('ready', () => {
-//     store = new Store();
-//     console.log('ready')
-
-//     dirPath = dialog.showOpenDialog({ properties: ['openDirectory'] });
-//     store.set('dirPath', dirPath);
-// });
 ipcMain.on('getWorkingDirPath', (event) => {
-    const historyStoreDirPath = store.get('historyStoreDirPath');
+    const historyStoreDirPath = storeManager.getConfig().historyStoreDirPath;
     mainWindow.webContents.send('responseGetWorkingDirPath', historyStoreDirPath);
 });
 
@@ -100,11 +83,11 @@ ipcMain.on('selectDir', async (event) => {
                 mainWindow.webContents.send('errorSelectDir', err);
                 return;
             }
-            store.set('dirPath', dirPath);
+            storeManager.setSingleConfig('dirPath', dirPath);
             console.log('requestDirPath', dirPath)
-            const historyStoreDirPath = store.get('historyStoreDirPath') || [];
+            const historyStoreDirPath = storeManager.getConfig().historyStoreDirPath || [];
             const uniqueStoreDirPath = [...new Set([...historyStoreDirPath, dirPath])];
-            store.set('historyStoreDirPath', uniqueStoreDirPath);
+            storeManager.setSingleConfig('historyStoreDirPath', uniqueStoreDirPath);
             mainWindow.webContents.send('responseSelectDir', dirPath);
             setTimeout(() => {
                 console.log('setTimeout')
@@ -119,7 +102,7 @@ ipcMain.on('selectDir', async (event) => {
 ipcMain.on('openHistoryDir', (event, dirPath) => {
     startMockManager();
     console.log('openHistoryDir', dirPath)
-    store.set('dirPath', dirPath);
+    storeManager.setSingleConfig('dirPath', dirPath);
     mainWindow.loadFile(path.join(__dirname, './views/index.html'));
 });
 
@@ -140,6 +123,12 @@ ipcMain.on('deleteMock', (event, filename) => {
     console.log('delete', filename)
     deleteMock(filename);
     mainWindow.webContents.send('responseDeleteMock', filename);
+});
+
+ipcMain.on('deleteAllMock', (event) => {
+    console.log('deleteAllMock')
+    deleteAllMock();
+    mainWindow.webContents.send('responseDeleteAllMock');
 });
 
 ipcMain.on('startServer', (event, port) => {
@@ -189,3 +178,20 @@ ipcMain.on('changeValueMock', (event, filename, key, value)=>{
         mainWindow.webContents.send('responseChangeValueMockFail');
     }
 })
+
+ipcMain.on('byPassGlobalChange', (event, value)=>{
+    console.log('byPassGlobalChange', value)
+    storeManager.setSingleConfig('bypassGlobal', value);
+    mainWindow.webContents.send('responseByPassGlobalChange');
+});
+
+ipcMain.on('changeConfig', (event, key, value)=>{
+    console.log('changeConfig', key, value)
+    storeManager.setSingleConfig(key, value);
+    mainWindow.webContents.send('responseChangeConfig');
+});
+
+ipcMain.on('getConfig', (event)=>{
+    console.log('getConfig')
+    mainWindow.webContents.send('responseGetConfig', storeManager.getConfig());
+});

@@ -1,4 +1,4 @@
 exports.config = {
     bypassCache: false,
-    bypassSave: false,
+    bypassGlobal: false,
 };

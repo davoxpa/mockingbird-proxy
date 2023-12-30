@@ -1,15 +1,16 @@
 const fs = require("fs");
-const Store = require('electron-store');
 const path = require("path");
 const { BrowserWindow, ipcMain } = require("electron");
+const StoreManager = require('../storeManager');
+const storeManager = StoreManager.getInstance();
 
 // Definisci il percorso della cartella che desideri controllare/creare
-const store = new Store();
+
 let folderPath;
 
 const startMockManager = () => {
-  console.log('startMockManager', store.get('dirPath'));
-  folderPath = store.get('dirPath');
+  console.log('startMockManager', storeManager.getConfig().dirPath);
+  folderPath = storeManager.getConfig().dirPath;
 }
 
 const saveMock = (filename, mock) => {
@@ -41,6 +42,17 @@ const deleteMock = (filename) => {
   } catch (error) {
     console.log("mock non esistente :", filename);
     return false;
+  }
+}
+
+const deleteAllMock = () => {
+  try{
+    const files = fs.readdirSync(folderPath);
+    files.forEach((file) => {
+      fs.unlinkSync(path.join(folderPath, file));
+    });
+  } catch (error) {
+    console.log("error:", error);
   }
 }
 
@@ -88,6 +100,7 @@ module.exports = {
   saveMock,
   getMock,
   deleteMock,
+  deleteAllMock,
   getAllMock,
   startMockManager,
   changeValueOnMock

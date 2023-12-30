@@ -11856,6 +11856,14 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+@keyframes timer-delete {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
+  }
+}
 body {
   background-color: #262d34;
   color: white;
@@ -11867,6 +11875,25 @@ body {
 .top-bar .header img {
   width: 60px;
   height: 60px;
+}
+
+.top-action-all {
+  margin-bottom: 0.3rem;
+}
+.top-action-all .delete-section {
+  margin-left: 1rem;
+}
+.top-action-all .confirm-delete-all {
+  position: relative;
+}
+.top-action-all .confirm-delete-all .time-delete {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 4px;
+  background-color: #ffe700;
+  animation-name: timer-delete;
+  animation-duration: 5s;
 }
 
 .controller-container .play {
