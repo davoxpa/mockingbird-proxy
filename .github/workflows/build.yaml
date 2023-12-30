@@ -1,0 +1,40 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - build
+
+jobs:
+  build-and-release:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build for MacOS
+      run: npm run build:mac
+
+    - name: Build for Windows
+      run: npm run build:windows
+
+    - name: Build for Linux
+      run: npm run build:linux
+
+    - name: Create Release
+      id: create_release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          ./dist/mockingbird-proxy-portable-*.exe
+          ./dist/mockingbird-proxy-*.dmg
+          ./dist/mockingbird-proxy-*.AppImage
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
