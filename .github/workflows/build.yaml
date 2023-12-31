@@ -6,16 +6,20 @@ on:
       - build
 
 jobs:
-  build-and-release:
+  tag:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate Tag
+        id: tagger
+        uses: anothrNick/github-tag-action@1.26.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
+  build-and-release:
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Generate Tag
-      id: tagger
-      uses: anothrNick/github-tag-action@1.26.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
     - name: Setup Node
       uses: actions/setup-node@v2
@@ -43,4 +47,6 @@ jobs:
           ./dist/mockingbird-proxy-*.dmg
           ./dist/mockingbird-proxy-*.AppImage
         token: ${{ secrets.GH_TOKEN }}
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
