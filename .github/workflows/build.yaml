@@ -17,6 +17,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
   build-and-release:
+    needs: tag
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
