@@ -6,24 +6,18 @@ on:
       - build
 
 jobs:
-  tag:
-    runs-on: ubuntu-latest
-    outputs:
-      new_tag: ${{ steps.tagger.outputs.new_tag }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Generate Tag
-        id: tagger
-        uses: anothrNick/github-tag-action@1.26.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
   build-and-release:
     needs: tag
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
 
+    - name: Extract version from package.json
+      run: |
+        VERSION=$(cat package.json | grep version | awk -F: '{ print $2 }' | sed 's/[",]//g' | xargs)
+        echo "Version: $VERSION"
+        echo "::set-output name=VERSION::$VERSION"
+        
     - name: Setup Node
       uses: actions/setup-node@v2
       with:
