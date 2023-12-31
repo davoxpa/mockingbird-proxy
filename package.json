@@ -8,9 +8,9 @@
         "start:dev": "npm-run-all --parallel start sass:electron",
         "sass:electron": "sass --watch src/assets/scss:src/assets/styles",
         "build": "electron-builder --all",
-        "build:macos": "electron-builder --macos --x64",
-        "build:win": "electron-builder --win --x64",
-        "build:linux": "electron-builder --linux --x64"
+        "build:macos": "electron-builder --macos --x64  --publish never",
+        "build:win": "electron-builder --win --x64  --publish never",
+        "build:linux": "electron-builder --linux --x64  --publish never"
     },
     "author": "Davide Salvato",
     "license": "ISC",
