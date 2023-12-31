@@ -8,6 +8,8 @@ on:
 jobs:
   tag:
     runs-on: ubuntu-latest
+    outputs:
+      new_tag: ${{ steps.tagger.outputs.new_tag }}
     steps:
       - uses: actions/checkout@v2
       - name: Generate Tag
@@ -48,6 +50,7 @@ jobs:
           ./dist/mockingbird-proxy-*.dmg
           ./dist/mockingbird-proxy-*.AppImage
         token: ${{ secrets.GH_TOKEN }}
+        tag_name: ${{ needs.tag.outputs.new_tag }}
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
