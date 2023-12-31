@@ -37,4 +37,4 @@ jobs:
           ./dist/mockingbird-proxy-*.dmg
           ./dist/mockingbird-proxy-*.AppImage
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.RELEASE_SECRET }}
