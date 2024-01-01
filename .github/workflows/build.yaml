@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-release:
     runs-on: macos-latest
+    environment: 
+      name: production
     steps:
     - uses: actions/checkout@v2
 
