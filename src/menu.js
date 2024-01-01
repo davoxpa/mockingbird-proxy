@@ -23,24 +23,10 @@ const menuTemplate = [
         label: 'File',
         submenu: [
             {
-                label: 'open workspace',
-                accelerator: 'CmdOrCtrl+N',
-                click() {
-                    ipcMain.emit('goToConfig');
-                },
-            },
-            {
-                label: 'Save',
-                accelerator: 'CmdOrCtrl+S',
-                click() {
-                    console.log('Save File');
-                },
-            },
-            {
-                label: 'Open',
+                label: 'Select Workspace',
                 accelerator: 'CmdOrCtrl+O',
                 click() {
-                    console.log('Open File');
+                    ipcMain.emit('goToConfig');
                 },
             },
             {
@@ -48,56 +34,6 @@ const menuTemplate = [
                 accelerator: 'CmdOrCtrl+Q',
                 click() {
                     app.quit();
-                },
-            },
-        ],
-    },
-    {
-        label: 'Edit',
-        submenu: [
-            {
-                label: 'Undo',
-                accelerator: 'CmdOrCtrl+Z',
-                click() {
-                    console.log('Undo');
-                },
-            },
-            {
-                label: 'Redo',
-                accelerator: 'Shift+CmdOrCtrl+Z',
-                click() {
-                    console.log('Redo');
-                },
-            },
-            {
-                type: 'separator',
-            },
-            {
-                label: 'Cut',
-                accelerator: 'CmdOrCtrl+X',
-                click() {
-                    console.log('Cut');
-                },
-            },
-            {
-                label: 'Copy',
-                accelerator: 'CmdOrCtrl+C',
-                click() {
-                    console.log('Copy');
-                },
-            },
-            {
-                label: 'Paste',
-                accelerator: 'CmdOrCtrl+V',
-                click() {
-                    console.log('Paste');
-                },
-            },
-            {
-                label: 'Select All',
-                accelerator: 'CmdOrCtrl+A',
-                click() {
-                    console.log('Select All');
                 },
             },
         ],
@@ -130,6 +66,11 @@ const menuTemplate = [
                 role: 'minimize',
             },
             {
+                label: 'Maximize',
+                accelerator: 'CmdOrCtrl+Shift+M',
+                role: 'maximize',
+            },
+            {
                 label: 'Close',
                 accelerator: 'CmdOrCtrl+W',
                 role: 'close',
@@ -140,7 +81,7 @@ const menuTemplate = [
         label: 'Help',
         submenu: [
             {
-                label: 'Learn More',
+                label: 'Github Mockingbird Proxy',
                 click() {
                     require('electron').shell.openExternal('https://github.com/davoxpa/mockingbird-proxy');
                 },
