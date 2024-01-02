@@ -2,77 +2,80 @@
 
 <img src="./src/assets/logo/mocking-bird-proxy-logo-1024.jpg" alt="Mockingbird Proxy Interface" width="100">
 
-## Introduzione
-Mockingbird Proxy è un potente strumento di sviluppo che funge da intermediario tra il tuo frontend/backend e le API esterne, archiviando automaticamente tutte le chiamate API in file JSON.
+## Download
+Try it by downloading the latest software version.
+It's an executable for Windows, Linux, and Mac that requires no installation.
+[Download latest version](https://github.com/davoxpa/mockingbird-proxy/releases)
 
+## Introduction
+Mockingbird Proxy is a powerful development tool acting as an intermediary between your frontend/backend and external APIs, automatically storing all API calls in JSON files.
 
-## Caratteristiche
-- **Archiviazione Automatica**: Memorizza tutte le chiamate API.
-- **Modifica Risposte**: Personalizza risposte API e status code.
-- **Caching**: Accelera il caricamento durante lo sviluppo.
-- **Flessibilità**: Passa facilmente dalla cache alle risposte reali.
+## Features
+- **Automatic Storage**: Saves all API calls.
+- **Modify Responses**: Customize API responses and status codes.
+- **Caching**: Accelerates loading during development.
+- **Flexibility**: Easily switch from cache to real responses.
 
-## Configurazione
-- **Porta e Percorso**: Configura la porta e il percorso di salvataggio dei file JSON.
-- **Integrazione**: Modifica l'URL in sviluppo per utilizzare il proxy.
+## Configuration
+- **Port and Path**: Set the port and the path for saving JSON files.
+- **Integration**: Modify the URL in development to use the proxy.
 
-## Introduzione
+## Getting Started
 
-Mockingbird-Proxy è uno strumento efficace per il mocking delle API durante lo sviluppo di applicazioni. Questa guida ti mostrerà come iniziare a usarlo.
+Mockingbird-Proxy is an effective tool for API mocking during application development. This guide will show you how to start using it.
 
-## Avvio dell'Applicazione Mockingbird-Proxy
+## Starting the Mockingbird-Proxy Application
 
-### Passo 1: Avvio dell'Applicazione
+### Step 1: Starting the Application
 
-1. Avvia l'applicazione Mockingbird-Proxy.
-2. Nel pannello in alto a destra, trova l'opzione per cambiare la porta.
-3. Scegli la porta desiderata e avvia il server.
+1. Start the Mockingbird-Proxy application.
+2. In the top right panel, find the option to change the port.
+3. Choose the desired port and start the server.
 
-### Passo 2: Configurazione nel Tuo Progetto
+### Step 2: Configuration in Your Project
 
-Dopo aver avviato il server Mockingbird-Proxy, reindirizza le tue chiamate API attraverso il proxy. 
+After starting the Mockingbird-Proxy server, redirect your API calls through the proxy.
 
-Ad esempio, cambia:<br />
-`https://il-mio-backend.com/api/v1/blog/posts`<br />
-in:<br />
-`http://localhost:3000/https://il-mio-backend.com/api/v1/blog/posts`<br />
+For example, change:  
+`https://my-backend.com/api/v1/blog/posts`  
+to:  
+`http://localhost:3000/https://my-backend.com/api/v1/blog/posts`  
 
-
-Aggiungi `http://localhost:3000/` come prefisso all'URL del tuo backend per utilizzare il server di mocking.
+Add `http://localhost:3000/` as a prefix to your backend URL to use the mocking server.
 
 ---
 
-## Vantaggi
-- **Documentazione del Modello Dati**: Utile per archiviare il modello dati delle chiamate API.
-- **Eliminazione dei Problemi CORS**: Facilita lo sviluppo evitando problemi di CORS.
-- **Compatibilità Estesa**: Supporta vari framework e piattaforme.
+## Benefits
+- **Data Model Documentation**: Useful for storing the data model of API calls.
+- **Elimination of CORS Issues**: Facilitates development by avoiding CORS issues.
+- **Extended Compatibility**: Supports various frameworks and platforms.
 
 ## Screenshots
-![Page selct working dir to save json](./screenshot/select-mock-dir.png)
+![Page select working dir to save json](./screenshot/select-mock-dir.png)
 ![Page List mock](./screenshot/list-mock-api.png)
 ![Page edit mock](./screenshot/edit-mock-api.png)
 
 ## Roadmap
-- [x] Aggiungi funzionalità di modifica delle risposte.
-- [x] Aggiungi funzionalità di modifica dello status code.
-- [x] Aggiungi funzionalità di caching.
-- [x] Aggiungi funzionalità di bypass singola url.
-- [x] Aggiungi funzionalità di bypass massivo.
-- [x] Aggiungere funzionalità di cancellazione di tutti i file.
-- [] Aggiungere funzionalità di ricerca tra i mock.
-- [] Aggiungere un monitor per i log delle chiamate API.
+- [x] Add functionality to modify responses.
+- [x] Add functionality to modify status codes.
+- [x] Add caching functionality.
+- [x] Add functionality for single URL bypass.
+- [x] Add functionality for massive bypass.
+- [x] Add functionality to delete all files.
+- [] Add functionality to search among mocks.
+- [] Add a monitor for API call logs.
 
-## Contribuire
+## Contributing
 
-Apprezziamo ogni contributo a Mockingbird Proxy! Ecco come puoi partecipare:
+We appreciate every contribution to Mockingbird Proxy! Here's how you can participate:
 
-1. **Fork del Repository**: Visita il [repository GitHub](https://github.com/davoxpa/mockingbird-proxy/) e crea un fork.
-2. **Crea una Branch**: Dalla tua fork, crea una nuova branch per le tue modifiche.
-3. **Apporta Modifiche**: Implementa le tue idee e correzioni.
-4. **Invia una Pull Request**: Una volta testate le modifiche, invia una pull request alla branch principale.
-5. **Revisione**: Esamineremo la tua pull request e ti forniremo un feedback.
+1. **Fork the Repository**: Visit the [GitHub repository](https://github.com/davoxpa/mockingbird-proxy/) and create a fork.
+2. **Create a Branch**: From your fork, create a new branch for your changes.
+3. **Make Changes**: Implement your ideas and fixes.
+4. **Submit a Pull Request**: Once you've tested your changes, submit a pull request to the main branch.
+5. **Review**: We will review your pull request and provide feedback.
 
-Ogni contributo, grande o piccolo, è molto apprezzato. Grazie per il tuo supporto!
+Every contribution, big or small, is greatly appreciated. Thank you for your support!
 
-## Licenza
+## License
 Apache License 2.0
