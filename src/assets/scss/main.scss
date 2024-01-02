@@ -19,6 +19,12 @@ body {
 }
 
 .top-bar {
+  &>div{
+    margin-top: .5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .header {
     display: flex;
 

@@ -9,13 +9,20 @@
 <body>
   <div class="container">
     <div class="row top-bar">
-      <div class="col-6">
+      <div class="col-4">
         <div class="header">
           <img src="../assets/logo/mocking-bird-proxy-logo.jpg" class="img-fluid" alt="" srcset="">
           <h1>Mockingbird Proxy</h1>
         </div>
       </div>
-      <div class="col-6 text-end">
+      <div class="col-4">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="search" placeholder="Search" aria-label="Search" aria-describedby="search" onkeyup="searchMock()">
+          <button class="btn btn-outline-secondary" id="button-reset-search" type="button" onclick="resetSearch()"><i class="stop bi bi-x"></i></button>
+          <!-- <button class="btn btn-outline-secondary" id="button-search" type="button" onclick="searchMock()">Search</button> -->
+        </div>
+      </div>
+      <div class="col-4 text-end">
         <p>Save dir: <span id="path"></span></p>
       </div>
     </div>

@@ -11869,6 +11869,12 @@ body {
   color: white;
 }
 
+.top-bar > div {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .top-bar .header {
   display: flex;
 }

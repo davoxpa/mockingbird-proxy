@@ -83,6 +83,36 @@ const getAllMock = () => {
   }
 }
 
+const filterMock = (search) => {
+  try {
+    const files = fs.readdirSync(folderPath);
+    let mockList = [];
+    files.forEach((file) => {
+      if (file.endsWith(".json")) {
+        const filePath = path.join(folderPath, file);
+        const fileContent = fs.readFileSync(filePath, "utf8");
+        const mock = JSON.parse(fileContent);
+        mockList.push(mock);
+      }
+    });
+
+    mockList = mockList.sort((a, b) => {
+      return a.timestamp - b.timestamp;
+    });
+
+    mockList = mockList.filter((mock) => {
+      mockString = JSON.stringify(mock);
+      mockString = mockString.toLowerCase();
+      search = search.toLowerCase();
+      return mockString.includes(search);
+    });
+    return mockList;
+  } catch (error) {
+    console.log("error:", error);
+    return null;
+  }
+}
+
 const changeValueOnMock = (filename, key, value) => {
   try {
     let mock = getMock(filename);
@@ -103,5 +133,6 @@ module.exports = {
   deleteAllMock,
   getAllMock,
   startMockManager,
-  changeValueOnMock
+  changeValueOnMock,
+  filterMock
 };

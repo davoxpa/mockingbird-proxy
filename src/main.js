@@ -25,7 +25,7 @@ if (isDev) {
 require('./menu');
 
 // gestione mock
-const { getAllMock, deleteMock, deleteAllMock, getMock, saveMock, startMockManager, changeValueOnMock } = require('./app-proxy-server/mockManager');
+const { getAllMock, deleteMock, deleteAllMock, getMock, saveMock, startMockManager, changeValueOnMock, filterMock } = require('./app-proxy-server/mockManager');
 
 // gestione server 
 const {startServer, stopServer, checkStatusServer} = require('./app-proxy-server/server');
@@ -97,6 +97,12 @@ ipcMain.on('selectDir', async (event) => {
     } catch (error) {
         console.error('Errore:', error);
     }
+});
+
+ipcMain.on('searchMock', (event, search) => {
+    console.log('searchMock', search)
+    result = filterMock(search);
+    mainWindow.webContents.send('responseSearchMock', result);
 });
 
 ipcMain.on('openHistoryDir', (event, dirPath) => {

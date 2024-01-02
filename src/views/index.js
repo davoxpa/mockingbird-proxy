@@ -18,6 +18,10 @@ window.addEventListener('load', () => {
     document.querySelector('#port').addEventListener('keyup', (event) => {
         localStorage.setItem('port', event.target.value);
     });
+    if(localStorage.getItem('search')){
+        document.querySelector('#search').value = localStorage.getItem('search');
+        searchMock();
+    }
 });
 
 
@@ -67,7 +71,7 @@ ipcRenderer.on('responseDeleteMock', (event, filename) => {
 });
 
 function editMock(uuid) {
-  writeLocalStorage('uuid', uuid);
+  localStorage.setItem('uuid', uuid);
   ipcRenderer.send('editMock', uuid);
 }
 ipcRenderer.on('responseEditMock', (event, filename) => {
@@ -88,7 +92,7 @@ function changeUiToServerStart(){
 }
 ipcRenderer.on('responseStartServer', (event, port) => {
   changeUiToServerStart();
-  writeLocalStorage('port', port);
+  localStorage.setItem('port', port);
   console.log('responseStartServer', port);
 });
 
@@ -107,10 +111,6 @@ ipcRenderer.on('responseStopServer', (event) => {
   changeUiToServerStop();
   console.log('responseStopServer');
 });
-
-function writeLocalStorage(name, value) {
-    localStorage.setItem(name, value);
-}
 
 function showConfirmDelete() {
   document.querySelector('.delete-all').classList.add('d-none');
@@ -133,6 +133,29 @@ function deleteAllMock() {
 ipcRenderer.on('responseDeleteAllMock', (event) => {
   ipcRenderer.send('requestFilesList');
 });
+
+function searchMock() {
+  const search = document.querySelector('#search').value;
+  // save search in localstorage
+  localStorage.setItem('search', search);
+  ipcRenderer.send('searchMock', search);
+}
+ipcRenderer.on('responseSearchMock', (event, files) => {
+  console.log('responseSearchMock', files);
+  document.querySelector('.row-mock').innerHTML = '';
+  files.forEach((file) => {
+    // generateMockRow(file);
+    const mockElement = createMockElement(file);
+    document.querySelector('.row-mock').appendChild(mockElement);
+  });
+});
+
+function resetSearch(){
+  debugger
+  document.querySelector('#search').value = '';
+  localStorage.removeItem('search');
+  ipcRenderer.send('requestFilesList');
+}
 
 function bypassChange(el) {
     console.log('bypassChange', el);
