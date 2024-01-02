@@ -1,6 +1,6 @@
 {
     "name": "mockingbird-proxy",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "mockingbird-proxy is a simple proxy server that allows you to mock API responses.",
     "main": "./src/main.js",
     "scripts": {
