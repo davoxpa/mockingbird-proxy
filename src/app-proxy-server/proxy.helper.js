@@ -39,7 +39,7 @@ async function proxySniffer(req, res, next) {
                 bypassCache: config.bypassCache,
                 uuid: sha256,
                 method: req.method,
-                payload: req.method === 'GET' || req.method === 'HEAD' ? undefined : JSON.stringify(req.body),
+                payload: req.method === 'GET' || req.method === 'HEAD' ? undefined : req.body,
                 targetUrl: target,
                 response: responseData || undefined,
                 statusCode: externalResponse.status || undefined,

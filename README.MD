@@ -62,7 +62,8 @@ Add `http://localhost:3000/` as a prefix to your backend URL to use the mocking 
 - [x] Add functionality for single URL bypass.
 - [x] Add functionality for massive bypass.
 - [x] Add functionality to delete all files.
-- [] Add functionality to search among mocks.
+- [x] Add functionality to search among mocks.
+- [x] Add functionality to create mocks.
 - [] Add a monitor for API call logs.
 
 ## Contributing

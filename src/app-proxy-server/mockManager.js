@@ -3,6 +3,7 @@ const path = require("path");
 const { BrowserWindow, ipcMain } = require("electron");
 const StoreManager = require('../storeManager');
 const storeManager = StoreManager.getInstance();
+const crypto = require('crypto');
 
 // Definisci il percorso della cartella che desideri controllare/creare
 
@@ -31,6 +32,20 @@ const getMock = (filename) => {
     console.log("mock non esistente :", filename);
     return null;
   }
+}
+
+const createMock = (data) => {
+
+  if (data.payload && data.payload.length > 0) {
+      data.uuid = crypto
+          .createHash('sha256')
+          .update(data.targetUrl + JSON.stringify(data.payload))
+          .digest('hex');
+  } else {
+      data.uuid = crypto.createHash('sha256').update(data.targetUrl + JSON.stringify({})).digest('hex');
+  }
+  
+  return saveMock(data.uuid, data);
 }
 
 const deleteMock = (filename) => {
@@ -134,5 +149,6 @@ module.exports = {
   getAllMock,
   startMockManager,
   changeValueOnMock,
-  filterMock
+  filterMock,
+  createMock,
 };

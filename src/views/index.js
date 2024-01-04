@@ -168,6 +168,10 @@ function bypassAllChange(el) {
     ipcRenderer.send('byPassGlobalChange', el.checked);
 }
 
+function openPageCreateMock() {
+    ipcRenderer.send('openPageCreateMock');
+}
+
 // Generate dom element for mock
 
 function createMockElement({method, targetUrl, uuid, bypassCache}) {

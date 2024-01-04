@@ -25,7 +25,7 @@ if (isDev) {
 require('./menu');
 
 // gestione mock
-const { getAllMock, deleteMock, deleteAllMock, getMock, saveMock, startMockManager, changeValueOnMock, filterMock } = require('./app-proxy-server/mockManager');
+const { getAllMock, deleteMock, deleteAllMock, getMock, saveMock, startMockManager, changeValueOnMock, filterMock, createMock } = require('./app-proxy-server/mockManager');
 
 // gestione server 
 const {startServer, stopServer, checkStatusServer} = require('./app-proxy-server/server');
@@ -201,3 +201,15 @@ ipcMain.on('getConfig', (event)=>{
     console.log('getConfig')
     mainWindow.webContents.send('responseGetConfig', storeManager.getConfig());
 });
+
+ipcMain.on('openPageCreateMock', (event)=>{
+    console.log('openPageCreateMock')
+    mainWindow.loadFile(path.join(__dirname, './views/create.html'));
+});
+
+ipcMain.on('createNewMock', (event, mock)=>{
+    console.log('createNewMock', mock)
+    createMock(mock);
+    mainWindow.webContents.send('responseCreateNewMock');
+});
+
