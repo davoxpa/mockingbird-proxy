@@ -9,25 +9,25 @@
 <body>
   <div class="container">
     <div class="row top-bar">
-      <div class="col-4">
+      <div class="col-xl-4">
         <div class="header">
           <img src="../assets/logo/mocking-bird-proxy-logo.jpg" class="img-fluid" alt="" srcset="">
           <h1>Mockingbird Proxy</h1>
         </div>
       </div>
-      <div class="col-4">
+      <div class="col-xl-4">
         <div class="input-group mb-3">
           <input type="text" class="form-control" id="search" placeholder="Search" aria-label="Search" aria-describedby="search" onkeyup="searchMock()">
           <button class="btn btn-outline-secondary" id="button-reset-search" type="button" onclick="resetSearch()"><i class="stop bi bi-x"></i></button>
           <!-- <button class="btn btn-outline-secondary" id="button-search" type="button" onclick="searchMock()">Search</button> -->
         </div>
       </div>
-      <div class="col-4 text-end">
+      <div class="col-xl-4 text-end wrap-path">
         <p>Save dir: <span id="path"></span></p>
       </div>
     </div>
     <div class="row top-action-all">
-      <div class="col-8 controller-container d-flex justify-content-start align-items-center ">
+      <div class="col-lg-12 col-xl-8 controller-container d-flex justify-content-start align-items-center ">
         <!-- <input id="path" class="path" type="text" value="/Users/davidesalvato/Downloads/mockbird"> -->
         <span class="led"></span>
         <input id="port" class="port" type="text" value="">
@@ -35,7 +35,7 @@
         <i id="play" class="play bi bi-play-fill" onclick="startServer()"></i>
         <p id="config"></p>
       </div>
-      <div class="col-4 d-flex justify-content-end align-items-center">
+      <div class="col-lg-12 col-xl-4 d-flex my-sm-2 justify-content-xl-end align-items-center">
         <div>
           <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" role="switch" id="bypassGlobal" onchange="bypassAllChange(this)">
@@ -43,8 +43,8 @@
           </div>
         </div>
         <div class="delete-section">
-          <button type="button" class="btn btn-success delete-all" onclick="openPageCreateMock()"><i class="bi bi-file-earmark-plus-fill"></i> Add</button>
-          <button type="button" class="btn btn-danger delete-all" onclick="showConfirmDelete()"><i class="bi bi-trash-fill"></i> Delete all mock</button>
+          <button type="button" class="btn btn-success" onclick="openPageCreateMock()"><i class="bi bi-file-earmark-plus-fill"></i> Add</button>
+          <button type="button" class="btn btn-danger delete-all" onclick="showConfirmDelete()"><i class="bi bi-trash-fill"></i> Delete all</button>
           <button type="button" class="btn btn-danger confirm-delete-all d-none" onclick="deleteAllMock()">
             <i class="bi bi-trash-fill"></i>
             Confirm Delete
