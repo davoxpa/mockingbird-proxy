@@ -106,9 +106,9 @@ ipcMain.on('searchMock', (event, search) => {
 });
 
 ipcMain.on('openHistoryDir', (event, dirPath) => {
-    startMockManager();
     console.log('openHistoryDir', dirPath)
     storeManager.setSingleConfig('dirPath', dirPath);
+    startMockManager();
     mainWindow.loadFile(path.join(__dirname, './views/index.html'));
 });
 
