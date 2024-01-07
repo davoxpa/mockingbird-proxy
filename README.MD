@@ -55,7 +55,17 @@ Add `http://localhost:3000/` as a prefix to your backend URL to use the mocking 
 ![Page List mock](./screenshot/list-mock-api.png)
 ![Page edit mock](./screenshot/edit-mock-api.png)
 
-![Preview](./screenshot/mockingbird-proxy-video-1.gif)
+## Configure mockingbird-proxy
+![configure](./screenshot/mbp-0001.gif)
+
+## Edit json response
+![configure](./screenshot/mbp-0002.gif)
+
+## Bypass mocking bird proxy cache
+![configure](./screenshot/mbp-0003.gif)
+
+## Manipulate status code
+![configure](./screenshot/mbp-0004.gif)
 
 ## Roadmap
 - [x] Add functionality to modify responses.
