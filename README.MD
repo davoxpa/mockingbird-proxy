@@ -55,10 +55,7 @@ Add `http://localhost:3000/` as a prefix to your backend URL to use the mocking 
 ![Page List mock](./screenshot/list-mock-api.png)
 ![Page edit mock](./screenshot/edit-mock-api.png)
 
-<video width="100%" height="600" controls autoplay loop muted>
-    <source src="./screenshot/mockingbird-proxy-video-1.mp4" type="video/mp4">
-    Il tuo browser non supporta il tag video.
-</video>
+![Preview](./screenshot/mockingbird-proxy-video-1.gif)
 
 ## Roadmap
 - [x] Add functionality to modify responses.
