@@ -4,6 +4,7 @@ const { BrowserWindow, ipcMain } = require("electron");
 const StoreManager = require('../storeManager');
 const storeManager = StoreManager.getInstance();
 const crypto = require('crypto');
+const { get } = require("jquery");
 
 // Definisci il percorso della cartella che desideri controllare/creare
 
@@ -12,6 +13,19 @@ let folderPath;
 const startMockManager = () => {
   console.log('startMockManager', storeManager.getConfig().dirPath);
   folderPath = storeManager.getConfig().dirPath;
+  updateModel();
+}
+
+const updateModel = () => {
+  console.log('updateModel')
+  // cycle all file and update model
+  const files = getAllMock();
+  files.forEach((file) => {
+    if (file.delay === undefined) {
+      file["delay"] = 0;
+      saveMock(file.uuid, file);
+    }
+  });
 }
 
 const saveMock = (filename, mock) => {
@@ -44,7 +58,7 @@ const createMock = (data) => {
   } else {
       data.uuid = crypto.createHash('sha256').update(data.targetUrl + JSON.stringify({})).digest('hex');
   }
-  
+  data["delay"] = 0;
   return saveMock(data.uuid, data);
 }
 

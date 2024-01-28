@@ -151,7 +151,6 @@ ipcRenderer.on('responseSearchMock', (event, files) => {
 });
 
 function resetSearch(){
-  debugger
   document.querySelector('#search').value = '';
   localStorage.removeItem('search');
   ipcRenderer.send('requestFilesList');

@@ -12072,14 +12072,55 @@ body {
   color: white;
   border-bottom: 1px solid white;
 }
+.container-edit .jsoneditor .jsoneditor-tree-inner .jsoneditor-tree .jsoneditor-field {
+  color: #ff9d00;
+}
+.container-edit .jsoneditor .jsoneditor-tree-inner .jsoneditor-tree .jsoneditor-value.jsoneditor-string {
+  color: #5fd1ff !important;
+}
+.container-edit .jsoneditor .jsoneditor-tree-inner .jsoneditor-tree .jsoneditor-value.jsoneditor-number {
+  color: #fbf406;
+}
 .container-edit .jsoneditor .jsoneditor-tree-inner tbody {
   background-color: #262d34;
 }
-.container-edit .jsoneditor .jsoneditor-tree .jsoneditor-readonly {
-  color: #bfb9b9;
+.container-edit .jsoneditor .jsoneditor-outer {
+  background-color: #262d34;
 }
-.container-edit .jsoneditor .jsoneditor-tree button.jsoneditor-expanded {
-  filter: brightness(100);
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor {
+  height: 85vh !important;
+  max-height: calc(100vh - 180px);
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_gutter {
+  background-color: #262d34;
+  color: white;
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_gutter-active-line.ace_gutter-cell {
+  background-color: rgba(255, 157, 0, 0.3607843137);
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_active-line {
+  background-color: rgba(255, 157, 0, 0.3607843137);
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_line_group .ace_line {
+  color: #ffffff;
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_line_group .ace_line .ace_variable {
+  color: #ff9d00;
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_line_group .ace_line .ace_string {
+  color: #5fd1ff;
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_line_group .ace_line .ace_parent {
+  color: #ff9d00;
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_line_group .ace_line .ace_indent-guide {
+  color: #ff9d00;
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_line_group .ace_line .ace_numeric {
+  color: #fbf406;
+}
+.container-edit .jsoneditor .jsoneditor-outer .ace_editor .ace_scroller {
+  background-color: #262d34;
 }
 .container-edit .jsoneditor div.jsoneditor-field,
 .container-edit .jsoneditor div.jsoneditor-value,
@@ -12103,6 +12144,10 @@ body {
 }
 .container-edit .jsoneditor div.jsoneditor-tree button.jsoneditor-collapsed {
   filter: brightness(100);
+}
+.container-edit .jsoneditor .jsoneditor-statusbar {
+  background-color: #262d34;
+  color: white;
 }
 .container-edit .controller-json .bi {
   cursor: pointer;

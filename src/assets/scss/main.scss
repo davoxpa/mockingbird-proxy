@@ -8,6 +8,7 @@ $secondary: #245563;
   0% {
     width: 100%;
   }
+
   100% {
     width: 0;
   }
@@ -19,12 +20,13 @@ body {
 }
 
 .top-bar {
-  &>div{
+  &>div {
     margin-top: .5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
   .header {
     display: flex;
 
@@ -33,25 +35,29 @@ body {
       height: 60px;
     }
   }
-  .wrap-path{
-    p{
+
+  .wrap-path {
+    p {
       text-wrap: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    #path{
-    }
+
+    #path {}
   }
 }
 
-.top-action-all{
+.top-action-all {
   margin-bottom: .3rem;
-  .delete-section{
+
+  .delete-section {
     margin-left: 1rem;
   }
-  .confirm-delete-all{
+
+  .confirm-delete-all {
     position: relative;
-    .time-delete{
+
+    .time-delete {
       position: absolute;
       bottom: 0;
       right: 0;
@@ -143,6 +149,7 @@ body {
     background-color: #2b3947;
     color: white;
     border-radius: 10px;
+
     @media (max-width: 1000px) {
       grid-template-columns: 50px 1fr auto;
       grid-template-rows: 1fr 1fr 1fr;
@@ -160,34 +167,42 @@ body {
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    .target-url{
+
+    .target-url {
       grid-column: 2 / 3;
       grid-row: 1 / 2;
       margin-left: .5rem;
     }
+
     .actions {
       grid-column: 3 / 4;
       grid-row: 1 / 3;
+
       @media (max-width: 1000px) {
         grid-column: 2 / 4;
         grid-row: 3 / 4;
         justify-content: flex-end;
       }
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       .form-check-input:checked {
         background-color: #c30808;
         border-color: #d43f3f;
       }
     }
+
     .method {
       grid-column: 1 / 2;
       grid-row: 1 / 3;
+
       @media (max-width: 1000px) {
         grid-column: 1 / 2;
         grid-row: 1 / 4;
       }
+
       border-radius: 5px;
       background-color: #ea2929;
       color: white;
@@ -198,15 +213,19 @@ body {
       justify-content: center;
       align-items: center;
       font-weight: 700;
+
       &-get {
         background-color: #0baa20;
       }
+
       &-post {
         background-color: #df9401;
       }
+
       &-put {
         background-color: #ea5b29;
       }
+
       &-patch {
         background-color: #89460c;
       }
@@ -248,19 +267,71 @@ body {
     }
 
     .jsoneditor-tree-inner {
+      .jsoneditor-tree {
+        .jsoneditor-field {
+          color: #ff9d00;
+        }
+
+        .jsoneditor-value.jsoneditor-string {
+          color: #5fd1ff !important;
+        }
+
+        .jsoneditor-value.jsoneditor-number {
+          color: #fbf406;
+        }
+      }
+
       tbody {
         background-color: $primary;
       }
     }
 
-    .jsoneditor-tree {
-      .jsoneditor-readonly {
-        color: #bfb9b9;
-      }
+    .jsoneditor-outer {
+      background-color: $primary;
 
-      button {
-        &.jsoneditor-expanded {
-          filter: brightness(100);
+      .ace_editor {
+        height: 85vh !important;
+        max-height: calc(100vh - 180px);
+
+        .ace_gutter {
+          background-color: $primary;
+          color: white;
+        }
+        .ace_gutter-active-line.ace_gutter-cell {
+          background-color: #ff9d005c;
+        }
+        .ace_active-line {
+          background-color: #ff9d005c;
+        }
+
+        .ace_line_group {
+          .ace_line {
+            color: #ffffff;
+
+            .ace_variable {
+              color: #ff9d00;
+            }
+
+            .ace_string {
+              color: #5fd1ff;
+            }
+
+            .ace_parent {
+              color: #ff9d00;
+            }
+
+            .ace_indent-guide {
+              color: #ff9d00;
+            }
+
+            .ace_numeric {
+              color: #fbf406;
+            }
+          }
+        }
+
+        .ace_scroller {
+          background-color: $primary;
         }
       }
     }
@@ -291,6 +362,10 @@ body {
       filter: brightness(100);
 
     }
+    .jsoneditor-statusbar {
+      background-color: $primary;
+      color: white;
+    }
   }
 
   .controller-json {
@@ -304,6 +379,7 @@ body {
 
 .row-config {
   margin-top: 2rem;
+
   .config-add {
     flex-direction: column;
     display: flex;
@@ -312,21 +388,24 @@ body {
   }
 }
 
-.path-history{
+.path-history {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  .path{
+
+  .path {
     width: fit-content;
     height: fit-content;
     cursor: pointer;
     margin: .2rem 1rem;
     border-radius: 5px;
-    &:hover{
+
+    &:hover {
       background-color: #3b4e62;
     }
-    p{
+
+    p {
       padding: .5rem;
       margin: 0;
     }
