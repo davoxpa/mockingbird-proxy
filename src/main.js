@@ -4,6 +4,7 @@ const path = require('path');
 const Store = require('electron-store');
 const StoreManager = require('./storeManager');
 const storeManager = StoreManager.getInstance();
+const mblog = require('./helper/log.helper');
 
 // dipendenza per ffmpeg che serve anche se si vuole fare un app portable
 const ffmpeg = require('fluent-ffmpeg');
@@ -17,8 +18,10 @@ const isDev =
 
 if (isDev) {
     console.log('In modalità Sviluppo');
+    mblog.log('In modalità Sviluppo');
 } else {
     console.log('In modalità Produzione');
+    mblog.log('In modalità Produzione');
 }
 
 // menu app 
@@ -85,6 +88,7 @@ ipcMain.on('selectDir', async (event) => {
             }
             storeManager.setSingleConfig('dirPath', dirPath);
             console.log('requestDirPath', dirPath)
+            mblog.log('requestDirPath', dirPath)
             const historyStoreDirPath = storeManager.getConfig().historyStoreDirPath || [];
             const uniqueStoreDirPath = [...new Set([...historyStoreDirPath, dirPath])];
             storeManager.setSingleConfig('historyStoreDirPath', uniqueStoreDirPath);
@@ -100,13 +104,13 @@ ipcMain.on('selectDir', async (event) => {
 });
 
 ipcMain.on('searchMock', (event, search) => {
-    console.log('searchMock', search)
     result = filterMock(search);
     mainWindow.webContents.send('responseSearchMock', result);
 });
 
 ipcMain.on('openHistoryDir', (event, dirPath) => {
     console.log('openHistoryDir', dirPath)
+    mblog.log('select working dir', dirPath)
     storeManager.setSingleConfig('dirPath', dirPath);
     startMockManager();
     mainWindow.loadFile(path.join(__dirname, './views/index.html'));
@@ -211,5 +215,10 @@ ipcMain.on('createNewMock', (event, mock)=>{
     console.log('createNewMock', mock)
     createMock(mock);
     mainWindow.webContents.send('responseCreateNewMock');
+});
+
+ipcMain.on('readLogs', (event)=>{
+    const log = mblog.getLogs();
+    mainWindow.webContents.send('responseReadLogs', log);
 });
 

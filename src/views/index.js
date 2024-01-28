@@ -47,7 +47,7 @@ ipcRenderer.on('responseFilesList', (event, files) => {
     console.log('File nella cartella:', files);
     let test = files.map((file) => file.targetUrl);
     console.log('test', test);
-    // Qui puoi manipolare il DOM per mostrare i file...
+    // insert list of mock in html
     document.querySelector('.row-mock').innerHTML = '';
     files.forEach((file) => {
         // generateMockRow(file);
@@ -180,6 +180,45 @@ ipcRenderer.on('responseSearchMock', (event, files) => {
     document.querySelector('.row-mock').appendChild(mockElement);
   });
 });
+
+let logInterval;
+function readLogs() {
+  ipcRenderer.send('readLogs');
+  const sectionLogs = document.querySelector('.logs-section .logs-section-container');
+  sectionLogs.classList.remove('d-none');
+  sectionLogs.classList.add('d-block');
+  document.querySelector('.logs-section .logs-section-buttons #logs-open').classList.add('d-none');
+  document.querySelector('.logs-section .logs-section-buttons #logs-close').classList.remove('d-none');
+  document.querySelector('body').style.paddingBottom = '25vh';
+  logInterval = setInterval(() => {
+    ipcRenderer.send('readLogs');
+  }, 100000);
+  setTimeout(() => {
+      // scroll to bottom
+      sectionLogs.scrollTop = sectionLogs.scrollHeight;
+  }, 30);
+}
+ipcRenderer.on('responseReadLogs', (event, logs) => {
+    console.log('responseReadLogs', logs);
+    document.querySelector('.logs-section .logs-section-container').innerHTML = '';
+    logs.forEach((log) => {
+        const p = document.createElement('p');
+        p.textContent = log.message;
+        p.className = `log-type-${log.type}`;
+        document.querySelector('.logs-section .logs-section-container').appendChild(p);
+    });
+});
+function hideLogs() {
+  const sectionLogs = document.querySelector('.logs-section .logs-section-container');
+  sectionLogs.classList.remove('d-block');
+  sectionLogs.classList.add('d-none');
+
+  document.querySelector('.logs-section .logs-section-buttons #logs-open').classList.remove('d-none');
+  document.querySelector('.logs-section .logs-section-buttons #logs-close').classList.add('d-none');
+  document.querySelector('body').style.paddingBottom = '30px';
+  clearInterval(logInterval);
+}
+
 
 function resetSearch(){
   document.querySelector('#search').value = '';

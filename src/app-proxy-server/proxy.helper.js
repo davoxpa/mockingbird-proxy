@@ -4,6 +4,7 @@ const { getMock, saveMock } = require('./mockManager');
 const StoreManager = require('../storeManager');
 const e = require('express');
 const storeManager = StoreManager.getInstance();
+const mblog = require('../helper/log.helper');
 
 
 async function proxySniffer(req, res, next) {
@@ -21,10 +22,14 @@ async function proxySniffer(req, res, next) {
         if (!config.bypassGlobal && mockArchive && !mockArchive.bypassCache) {
             // Restituisci la risposta dall'archivio
             if (mockArchive.delay) {
+                mblog.log(`Mock found for ${target} with delay ${mockArchive.delay}`)
                 await new Promise((resolve) => setTimeout(resolve, mockArchive.delay));
             }
+            mblog.log(`Mock found for ${target}`)
             res.status(mockArchive.statusCode).json(mockArchive.response);
         } else {
+            mblog.log(`Mock not found for ${target} or bypassCache is true`)
+
             // Inoltra la richiesta al server esterno
 
             const newHeaders = req.headers;
@@ -44,6 +49,7 @@ async function proxySniffer(req, res, next) {
             if (contentType && contentType.includes('application/json')) {
                 responseData = await externalResponse.json();
             }else{
+                mblog.log(`Response is not json for ${target}, this response will not be saved in archive`)
                 // La risposta è un file media o altro tipo di contenuto
                 const responseData = await externalResponse
                 res.set('Content-Type', contentType);
@@ -72,6 +78,7 @@ async function proxySniffer(req, res, next) {
         }
     } catch (error) {
         console.log(error);
+        mblog.log(error);
         res.status(500).send('Errore interno del server');
     }
 }

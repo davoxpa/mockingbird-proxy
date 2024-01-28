@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors"); // Importa il middleware cors
 const { proxySniffer } = require("./proxy.helper");
+const mblog = require("../helper/log.helper");
 
 
 const app = express();
@@ -26,11 +27,15 @@ let server;
 module.exports.startServer = (port) => {
   server = app.listen(port, () => {
     console.log(`Server proxy in ascolto sulla porta ${port}`);
+    mblog.log(`Server proxy listening on port ${port}`);
   });
 };
 module.exports.stopServer = () => {
     if (server) {
-        server.close(() => console.log('Server fermato'));
+        server.close(() => {
+          console.log('Server fermato')
+          mblog.log('Server stopped')
+        });
         server = null;
     }
 };

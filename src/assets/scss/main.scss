@@ -17,6 +17,7 @@ $secondary: #245563;
 body {
   background-color: $primary;
   color: white;
+  padding-bottom: 30px;
 }
 
 .top-bar {
@@ -95,7 +96,7 @@ body {
     }
   }
 
-  .url-prefix{
+  .url-prefix {
     cursor: pointer;
   }
 
@@ -378,7 +379,6 @@ body {
 
     div.jsoneditor-tree button.jsoneditor-collapsed {
       filter: brightness(100);
-
     }
     .jsoneditor-statusbar {
       background-color: $primary;
@@ -426,6 +426,48 @@ body {
     p {
       padding: .5rem;
       margin: 0;
+    }
+  }
+}
+
+// .logs-section .logs-section-container.d-block>p:nth-child(2)
+.logs-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 1rem;
+  background: #161e25;
+
+  .logs-section-buttons {
+    border-bottom: 1px solid #3d4953;
+    display: flex;
+    justify-content: end;
+    font-size: 20px;
+
+    #logs-open {
+      display: flex;
+      justify-content: flex-end;
+    }
+    #logs-close {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &-container {
+    height: 20vh;
+    overflow-y: scroll;
+    background-color: #161e25;
+    padding: .5rem;
+
+    p.log-type-log {
+      color: #1bc349;
+      margin-bottom: .1rem;
+    }
+    p.log-type-error {
+      color: #e0200f;
+      margin-bottom: .1rem;
     }
   }
 }
