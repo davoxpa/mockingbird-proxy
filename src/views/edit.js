@@ -60,7 +60,6 @@ function saveMock() {
     jsonUpdated = window.editor.get();
     const recoveryData = addHideFields(jsonUpdated);
     console.log('jsonUpdated', recoveryData);
-    debugger;
     ipcRenderer.send('saveMock', recoveryData);
 }
 ipcRenderer.on('responseSaveMock', (event, data) => {

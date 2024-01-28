@@ -11909,9 +11909,25 @@ body {
 .controller-container .play {
   font-size: 20px;
   cursor: pointer;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 .controller-container .stop {
   font-size: 20px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.controller-container .copy {
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.controller-container .copy-clicked {
+  color: #ff9d00;
+}
+.controller-container .url-prefix {
   cursor: pointer;
 }
 .controller-container .port {

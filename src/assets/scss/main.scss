@@ -74,10 +74,28 @@ body {
   .play {
     font-size: 20px;
     cursor: pointer;
+    margin-left: .5rem;
+    margin-right: .5rem;
   }
 
   .stop {
     font-size: 20px;
+    cursor: pointer;
+    margin-left: .5rem;
+    margin-right: .5rem;
+  }
+
+  .copy {
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    &-clicked {
+      color: #ff9d00;
+    }
+  }
+
+  .url-prefix{
     cursor: pointer;
   }
 

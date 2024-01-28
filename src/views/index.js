@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { ipcRenderer } = require('electron');
 
+let prefixUrl = '';
+
 window.addEventListener('load', () => {
     ipcRenderer.send('checkServerRunning');
     ipcRenderer.send('getConfig');
@@ -83,7 +85,20 @@ function startServer() {
   ipcRenderer.send('startServer', port);
 }
 function changeUiToServerStart(){
-  document.querySelector('#config').innerHTML = 'http://localhost:' + document.querySelector('#port').value + '/https://your-real-api-url.com/api/v1/...';
+  prefixUrl = 'http://localhost:' + document.querySelector('#port').value + '/';
+  // create element span 
+  document.querySelector('#config').innerHTML = '';
+  const span = document.createElement('span');
+  span.className = 'url-prefix';
+  span.textContent = prefixUrl;
+  span.onclick = () => copyPrefixUrl();
+  document.querySelector('#config').appendChild(span);
+  const spanExample = document.createElement('span');
+  spanExample.className = 'url-prefix-example';
+  spanExample.textContent = 'https://your-real-api-url.com/api/v1/...';
+  document.querySelector('#config').appendChild(spanExample);
+  
+  // document.querySelector('#config').innerHTML = prefixUrl + 'https://your-real-api-url.com/api/v1/...';
   document.querySelector('#port').disabled = true;
   // document.querySelector('#path').disabled = true;
   document.querySelector('#stop').classList.remove('d-none');
@@ -95,6 +110,22 @@ ipcRenderer.on('responseStartServer', (event, port) => {
   localStorage.setItem('port', port);
   console.log('responseStartServer', port);
 });
+
+async function copyPrefixUrl() {
+  // add effect to button on click
+  document.querySelector('#config .url-prefix').classList.add('copy-clicked');
+  document.querySelector('#copy').classList.add('copy-clicked');
+  setTimeout(() => {
+    document.querySelector('#config .url-prefix').classList.remove('copy-clicked');
+    document.querySelector('#copy').classList.remove('copy-clicked');
+  }, 500);
+  try {
+    await navigator.clipboard.writeText(prefixUrl);
+  }
+  catch (err) {
+    console.error('Failed to copy: ', err);
+  }
+}
 
 function stopServer() {
   ipcRenderer.send('stopServer');
